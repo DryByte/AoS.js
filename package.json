@@ -1,0 +1,14 @@
+{
+  "name": "aos.js",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "DryByte",
+  "license": "GPL-3.0 License",
+  "dependencies": {
+    "enet": "^0.2.9"
+  }
+}
