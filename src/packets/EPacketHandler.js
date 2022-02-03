@@ -1,3 +1,6 @@
+const MapStart = require("./MapStart.js");
+const MapChunk = require("./MapChunk.js");
+
 module.exports = [
 	false,//PositionData - Keep disabled until implement,
 	false,//OrientationData - Keep disabled until implement,
@@ -17,8 +20,8 @@ module.exports = [
 	false,//StateData - Keep disabled until implement,
 	false,//KillAction - Keep disabled until implement,
 	false,//ChatMessage - Keep disabled until implement,
-	false,//MapStart - Keep disabled until implement,
-	false,//MapChunk - Keep disabled until implement,
+	MapStart,
+	MapChunk,
 	false,//PlayerLeft - Keep disabled until implement,
 	false,//TerritoryCapture - Keep disabled until implement,
 	false,//ProgressBar - Keep disabled until implement,

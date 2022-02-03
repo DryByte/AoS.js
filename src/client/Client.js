@@ -61,14 +61,18 @@ class Client extends EventEmitter {
         this.peer.on("disconnect", this.emit.bind(this, "disconnect"));
 
         this.peer.on("message", (packet, chan) => {
-        	readPacket(packet.data());
+        	this.readPacket(packet.data());
         	this.emit("rawPacket", packet.data());
         })
 	}
 
 	readPacket(packet) {
-		if(PACKETS[packet.data()[0]])
-			PACKETS[packet.data()[0]](packet.data());
+		if(PACKETS[packet[0]]) {
+			let pcket = new PACKETS[packet[0]]();
+			pcket.parseInfos(packet);
+
+			console.log(pcket.fields);
+		}
 	}
 }
 
