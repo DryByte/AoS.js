@@ -7,6 +7,7 @@ class Game {
 		//this.map = new VXL();
 		this.blueTeam = new Team();
 		this.greenTeam = new Team();
+		this.spectatorTeam = new Team();
 
 		this.gamemode = 0;
 		this.cps;

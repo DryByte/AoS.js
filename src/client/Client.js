@@ -72,8 +72,7 @@ class Client extends EventEmitter {
 		if(PACKETS[packet[0]]) {
 			let pcket = new PACKETS[packet[0]](packet);
 			pcket.organize(this.game)
-
-			console.log(pcket.fields);
+			this.emit(pcket.constructor.name, pcket.fields);
 		}
 	}
 }

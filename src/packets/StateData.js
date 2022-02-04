@@ -1,7 +1,7 @@
 const BasePacket = require("./BasePacket.js");
 const { mergeObj } = require("../utils.js");
 
-class MapChunk extends BasePacket {
+class StateData extends BasePacket {
 	constructor(packet) {
 		super()
 
@@ -87,7 +87,6 @@ class MapChunk extends BasePacket {
 
 	organize(game) {
 		game.local.playerId = this.fields.player_id.value;
-		game.players[game.local.playerId] = game.local;
 
 		game.fog[2] = this.fields.fog_blue.value;
 		game.fog[1] = this.fields.fog_green.value;
@@ -141,9 +140,7 @@ class MapChunk extends BasePacket {
 				}
 			}
 		}
-
-		console.log(game)
 	}
 }
 
-module.exports = MapChunk;
+module.exports = StateData;

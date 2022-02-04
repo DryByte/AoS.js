@@ -5,6 +5,10 @@ class Player {
 		this.kills = 0;
 		this.position = {x: 0, y: 0, z: 0};
 		this.orientation = {x: 0, y: 0, z: 0};
+		this.blockColor = new Array(3);
+		this.weapon = 0;
+		this.tool = 0;
+		this.team;
 	}
 }
 
