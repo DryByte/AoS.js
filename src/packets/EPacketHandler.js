@@ -1,3 +1,4 @@
+const StateData = require("./StateData.js");
 const MapStart = require("./MapStart.js");
 const MapChunk = require("./MapChunk.js");
 
@@ -17,7 +18,7 @@ module.exports = [
 	false,//CreatePlayer - Keep disabled until implement,
 	false,//BlockAction - Keep disabled until implement,
 	false,//BlockLine - Keep disabled until implement,
-	false,//StateData - Keep disabled until implement,
+	StateData,
 	false,//KillAction - Keep disabled until implement,
 	false,//ChatMessage - Keep disabled until implement,
 	MapStart,

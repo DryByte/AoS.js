@@ -2,6 +2,7 @@ const enet = require("enet");
 const EventEmitter = require("events");
 
 const Game = require("../game/Game.js");
+const Player = require("../game/Player.js");
 const { version } = require("../../package.json");
 const { parseURI, mergeObj } = require("../utils.js");
 const PACKETS = require("../packets/EPacketHandler.js");
@@ -26,13 +27,14 @@ class Client extends EventEmitter {
 
 		this.options = defOpt;
 
-		this.game = new Game();
+		this.game = new Game(this);
+		this.localPlayer = new Player();
 		this.client;
 		this.peer;
 	}
 
 	get name() {
-		return this.options.name;
+		return this.config.name;
 	}
 
 	set name(str) {
@@ -68,8 +70,8 @@ class Client extends EventEmitter {
 
 	readPacket(packet) {
 		if(PACKETS[packet[0]]) {
-			let pcket = new PACKETS[packet[0]]();
-			pcket.parseInfos(packet);
+			let pcket = new PACKETS[packet[0]](packet);
+			pcket.organize(this.game)
 
 			console.log(pcket.fields);
 		}
