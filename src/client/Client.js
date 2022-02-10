@@ -59,13 +59,13 @@ class Client extends EventEmitter {
 			port: address[1]
 		}, 1, 3);
 
-        this.peer.on("connect", this.emit.bind(this, "connect"));
-        this.peer.on("disconnect", this.emit.bind(this, "disconnect"));
+		this.peer.on("connect", this.emit.bind(this, "connect"));
+		this.peer.on("disconnect", this.emit.bind(this, "disconnect"));
 
-        this.peer.on("message", (packet, chan) => {
-        	this.readPacket(packet.data());
-        	this.emit("rawPacket", packet.data());
-        })
+		this.peer.on("message", (packet, chan) => {
+			this.readPacket(packet.data());
+			this.emit("rawPacket", packet.data());
+		})
 	}
 
 	readPacket(packet) {

@@ -12,6 +12,7 @@ class Game {
 		this.gamemode = 0;
 		this.cps;
 		this.local = host;
+		this.map;
 	}
 }
 

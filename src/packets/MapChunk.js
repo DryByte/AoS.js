@@ -5,11 +5,12 @@ class MapChunk extends BasePacket {
 		super()
 
 		this.fields = {
-			map_data: {type: "ubyte", value: 0}
+			map_data: packet
 		}
+	}
 
-		if (packet)
-			this.parseInfos(packet);
+	organize(game){
+		game.map.decompressor.addChunk(this.fields.map_data);
 	}
 }
 

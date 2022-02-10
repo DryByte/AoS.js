@@ -1,4 +1,5 @@
 const BasePacket = require("./BasePacket.js");
+const VXL = require("../vxl/VXL.js");
 
 class MapStart extends BasePacket {
 	constructor(packet) {
@@ -10,6 +11,10 @@ class MapStart extends BasePacket {
 
 		if (packet)
 			this.parseInfos(packet);
+	}
+
+	organize(game) {
+		game.map = new VXL();
 	}
 }
 

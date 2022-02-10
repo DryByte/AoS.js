@@ -140,6 +140,9 @@ class StateData extends BasePacket {
 				}
 			}
 		}
+
+		game.map.data = game.map.decompressor.exec();
+		game.map.loadVXL();
 	}
 }
 
