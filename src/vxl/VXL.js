@@ -25,6 +25,45 @@ class VXL {
 		return to_r;
 	}
 
+	canBlockAction(x,y,z) {
+		if (x < 0 || x > 511)
+			return 0;
+
+		if (y < 0 || x > 511)
+			return 0;
+
+		if (z < 0 || z > 63)
+			return 0;
+
+		return 1;
+	}
+
+	removeBlock(x,y,z) {
+		if(!this.canBlockAction(x, y, z))
+			return 0;
+
+		let block_i = this.getBlockIndex(x, y, z);
+		this.blocks[block_i] = 0;
+		return 1;
+	}
+
+	addBlock(obj) {
+		let pos = obj.position;
+		let color = obj.color;
+
+		if (!this.canBlockAction(pos.x, pos.y, pos.z))
+			return 0;
+
+		if (!color.a)
+			color.a = 255;
+
+		let block_i = this.getBlockIndex(pos.x, pos.y, pos.z);
+		let infos_32 = this.convertTo32(1,color.r, color.g, color.b, color.a);
+
+		this.blocks[block_i] = infos_32;
+		return 1;
+	}
+
 	getBlock(x,y,z) {
 		const base = this.blocks[this.getBlockIndex(x,y,z)];
 		const block = {solid: 0, color: {a:0,r:0,g:0,b:0}};
@@ -56,8 +95,8 @@ class VXL {
 
 		let offset = 0;
 
-		for (x = 0; x < 512; x++) {
-			for (y = 0; y < 512; y++) {
+		for (y = 0; y < 512; y++) {
+			for (x = 0; x < 512; x++) {
 				for (z = 0; z < 64; z++) {
 					this.blocks[this.getBlockIndex(x,y,z)] = this.convertTo32(1,0,0,0,0);
 				}

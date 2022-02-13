@@ -8,6 +8,7 @@ class Player {
 		this.blockColor = new Array(3);
 		this.weapon = 0;
 		this.tool = 0;
+		this.blocks = 50; // for client this is kinda useless...
 		this.team;
 	}
 }

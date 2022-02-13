@@ -20,6 +20,10 @@ class BasePacket {
 					this.fields[v].value = packet.readFloatLE(offset);
 					offset+=this.fields[v].skip_bytes+4||4;
 					break;
+				case "le int":
+					this.fields[v].value = packet.readIntLE(offset, 4);
+					offset+=this.fields[v].skip_bytes+4||4;
+					break;
 				case "uint32":
 					this.fields[v].value = packet.readUInt32LE(offset);
 					offset+=this.fields[v].skip_bytes+4||4;

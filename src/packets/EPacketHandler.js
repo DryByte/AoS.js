@@ -1,6 +1,7 @@
 const WorldUpdate = require("./WorldUpdate.js");
 const ExistingPlayer = require("./ExistingPlayer.js");
 const CreatePlayer = require("./CreatePlayer.js");
+const BlockAction = require("./BlockAction.js");
 const StateData = require("./StateData.js");
 const MapStart = require("./MapStart.js");
 const MapChunk = require("./MapChunk.js");
@@ -20,7 +21,7 @@ module.exports = [
 	false,//ShortPlayerData - Keep disabled until implement,
 	false,//MoveObject - Keep disabled until implement,
 	CreatePlayer,
-	false,//BlockAction - Keep disabled until implement,
+	BlockAction,
 	false,//BlockLine - Keep disabled until implement,
 	StateData,
 	false,//KillAction - Keep disabled until implement,
