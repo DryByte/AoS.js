@@ -9,7 +9,9 @@
   "author": "DryByte",
   "license": "GPL-3.0 License",
   "dependencies": {
-    "canvas": "^2.9.0",
     "enet": "^0.2.9"
+  },
+  "devDependencies": {
+    "canvas": "^2.9.0"
   }
 }
