@@ -4,7 +4,7 @@ const fs = require("fs");
 
 let client = new AoS.Client();
 
-function createMap(s) {
+function createMap() {
 	const canvas = createCanvas(512, 512);
 	const ctx = canvas.getContext("2d");
 

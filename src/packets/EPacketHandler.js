@@ -1,4 +1,5 @@
 const WorldUpdate = require("./WorldUpdate.js");
+const SetColor = require("./SetColor.js");
 const ExistingPlayer = require("./ExistingPlayer.js");
 const CreatePlayer = require("./CreatePlayer.js");
 const BlockAction = require("./BlockAction.js");
@@ -16,7 +17,7 @@ module.exports = [
 	false,//SetHP - Keep disabled until implement,
 	false,//Grenade - Keep disabled until implement,
 	false,//SetTool - Keep disabled until implement,
-	false,//SetColour - Keep disabled until implement,
+	SetColor,
 	ExistingPlayer,
 	false,//ShortPlayerData - Keep disabled until implement,
 	false,//MoveObject - Keep disabled until implement,
