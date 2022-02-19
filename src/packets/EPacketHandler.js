@@ -4,6 +4,7 @@ const ExistingPlayer = require("./ExistingPlayer.js");
 const CreatePlayer = require("./CreatePlayer.js");
 const BlockAction = require("./BlockAction.js");
 const StateData = require("./StateData.js");
+const ChatMessage = require("./ChatMessage.js");
 const MapStart = require("./MapStart.js");
 const MapChunk = require("./MapChunk.js");
 const PlayerLeft = require("./PlayerLeft.js");
@@ -26,7 +27,7 @@ module.exports = [
 	false,//BlockLine - Keep disabled until implement,
 	StateData,
 	false,//KillAction - Keep disabled until implement,
-	false,//ChatMessage - Keep disabled until implement,
+	ChatMessage,
 	MapStart,
 	MapChunk,
 	PlayerLeft,

@@ -44,12 +44,17 @@ describe("60s client test", function () {
 			console.log(fields);
 		});
 
-		client.on("WorldUpdate", (fields) => {
+		client.on("ChatMessage", (fields) => {
+			console.log("Received a Message:");
+			console.log(fields);
+		});
+
+		/*client.on("WorldUpdate", (fields) => {
 			//We access client.game.players because have
 			//better values and will display who is playing
 			console.log("World update packet:");
 			console.log(client.game.players);
-		});
+		});*/
 		/*client.on("rawPacket", (p) => {
 			console.log(p[0])
 		})*/

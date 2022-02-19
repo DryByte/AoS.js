@@ -6,7 +6,7 @@ class BasePacket {
 			switch(this.fields[v].type) {
 				case "string":
 					this.fields[v].value = packet.toString('utf8', offset, offset+(this.fields[v].max_chars||packet.length));
-					offset+=this.fields[v].max_chars||32;
+					offset+=this.fields[v].max_chars||packet.length;
 					break;
 				case "byte":
 					this.fields[v].value = packet.readInt8(offset);
