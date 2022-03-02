@@ -27,6 +27,10 @@ describe("60s client test", function () {
 		client.on("StateData", (fields) => {
 			console.log("State data packet:");
 			console.log(fields);
+
+			client.joinGame({
+				name: "test bot"
+			});
 		});
 
 		client.on("ExistingPlayer", (fields) => {

@@ -75,6 +75,11 @@ class BaseClient extends EventEmitter {
 			this.emit(pcket.constructor.name, pcket.fields);
 		}
 	}
+
+	sendPacket(packet) {
+		packet = new enet.Packet(packet, enet.PACKET_FLAG.RELIABLE);
+		this.peer.send(0, packet);
+	}
 }
 
 module.exports = BaseClient;
