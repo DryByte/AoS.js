@@ -1,13 +1,14 @@
 const BasePacket = require("./BasePacket.js");
+const { UByteType, StringType } = require("../types");
 
 class ChatMessage extends BasePacket {
 	constructor(packet) {
 		super()
 
 		this.fields = {
-			player_id:    {type: "ubyte", value: 0},
-			chat_type:    {type: "ubyte", value: 0},
-			chat_message: {type: "string", value: ""},
+			player_id:    new UByteType(),
+			chat_type:    new UByteType(),
+			chat_message: new StringType(),
 		};
 
 		if (packet)

@@ -1,11 +1,12 @@
 const BasePacket = require("./BasePacket.js");
+const { UByteType } = require("../types");
 
 class PlayerLeft extends BasePacket {
 	constructor(packet) {
 		super()
 
 		this.fields = {
-			player_left: {type: "ubyte", value: 0}
+			player_left: new UByteType()
 		};
 
 		if (packet)

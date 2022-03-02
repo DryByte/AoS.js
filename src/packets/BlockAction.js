@@ -1,15 +1,16 @@
 const BasePacket = require("./BasePacket.js");
+const { UByteType, LEIntType } = require("../types");
 
 class BlockAction extends BasePacket {
 	constructor(packet) {
 		super()
 
 		this.fields = {
-			player_id:        {type: "ubyte", value: 0},
-			action_type:      {type: "ubyte", value: 0},
-			x:                {type: "le int", value: 0},
-			y:                {type: "le int", value: 0},
-			z:                {type: "le int", value: 0}
+			player_id:        new UByteType(),
+			action_type:      new UByteType(),
+			x:                new LEIntType(),
+			y:                new LEIntType(),
+			z:                new LEIntType()
 		}
 
 		if (packet)

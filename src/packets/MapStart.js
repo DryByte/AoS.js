@@ -1,12 +1,13 @@
 const BasePacket = require("./BasePacket.js");
 const VXL = require("../vxl/VXL.js");
+const { UInt32Type } = require("../types");
 
 class MapStart extends BasePacket {
 	constructor(packet) {
 		super();
 
 		this.fields = {
-			map_size: {type: "uint32", value: 0}
+			map_size: new UInt32Type()
 		}
 
 		if (packet)

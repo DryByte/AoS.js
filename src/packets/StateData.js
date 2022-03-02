@@ -1,39 +1,40 @@
 const BasePacket = require("./BasePacket.js");
 const { mergeObj } = require("../utils.js");
+const { UByteType, StringType, LEFloatType } = require("../types");
 
 class StateData extends BasePacket {
 	constructor(packet) {
 		super()
 
 		this.fields = {
-			player_id:    {type: "ubyte", value: 0},
+			player_id:    new UByteType(),
 
-			fog_blue:     {type: "ubyte", value: 0},
-			fog_green:    {type: "ubyte", value: 0},
-			fog_red:      {type: "ubyte", value: 0},
+			fog_blue:     new UByteType(),
+			fog_green:    new UByteType(),
+			fog_red:      new UByteType(),
 
-			team_1_blue:  {type: "ubyte", value: 0},
-			team_1_green: {type: "ubyte", value: 0},
-			team_1_red:   {type: "ubyte", value: 0},
-			team_2_blue:  {type: "ubyte", value: 0},
-			team_2_green: {type: "ubyte", value: 0},
-			team_2_red:   {type: "ubyte", value: 0},
+			team_1_blue:  new UByteType(),
+			team_1_green: new UByteType(),
+			team_1_red:   new UByteType(),
+			team_2_blue:  new UByteType(),
+			team_2_green: new UByteType(),
+			team_2_red:   new UByteType(),
 
-			team_1_name:  {type: "string", value: "", max_chars: 10},
-			team_2_name:  {type: "string", value: "", max_chars: 10},
+			team_1_name:  new StringType(10),
+			team_2_name:  new StringType(10),
 
-			gamemode_id:  {type: "ubyte", value: 0}
+			gamemode_id:  new UByteType()
 		}
 
 		// I know this is ugly, but cant figure out other ways...
 		let gamemode_id = packet.readUInt8(31);
 		if (gamemode_id == 0) {
 			let ctfObj = {
-				team_1_score: {type: "ubyte", value: 0},
-				team_2_score: {type: "ubyte", value: 0},
+				team_1_score: new UByteType(),
+				team_2_score: new UByteType(),
 
-				capture_limit: {type: "ubyte", value: 0},
-				intel_signals: {type: "ubyte", value: 0},
+				capture_limit: new UByteType(),
+				intel_signals: new UByteType(),
 			};
 			let signal = packet.readUInt8(35); // after skips
 
@@ -41,41 +42,41 @@ class StateData extends BasePacket {
 			let team_2_holding = (signal>>1)&1;
 
 			if (team_2_holding) {
-				ctfObj.team_1_intel_holding = {type: "ubyte", value: 0, skip_bytes: 11};
+				ctfObj.team_1_intel_holding = new UByteType(11);
 			} else {
-				ctfObj.team_1_intel_x = {type: "le float", value: 0};
-				ctfObj.team_1_intel_y = {type: "le float", value: 0};
-				ctfObj.team_1_intel_z = {type: "le float", value: 0};
+				ctfObj.team_1_intel_x = new LEFloatType();
+				ctfObj.team_1_intel_y = new LEFloatType();
+				ctfObj.team_1_intel_z = new LEFloatType();
 			}
 
 			if (team_1_holding) {
-				ctfObj.team_2_intel_holding = {type: "ubyte", value: 0, skip_bytes: 11};
+				ctfObj.team_2_intel_holding = new UByteType(11);
 			} else {
-				ctfObj.team_2_intel_x = {type: "le float", value: 0};
-				ctfObj.team_2_intel_y = {type: "le float", value: 0};
-				ctfObj.team_2_intel_z = {type: "le float", value: 0};
+				ctfObj.team_2_intel_x = new LEFloatType();
+				ctfObj.team_2_intel_y = new LEFloatType();
+				ctfObj.team_2_intel_z = new LEFloatType();
 			}
 
-			ctfObj.team_1_base_x = {type: "le float", value: 0};
-			ctfObj.team_1_base_y = {type: "le float", value: 0};
-			ctfObj.team_1_base_z = {type: "le float", value: 0};
+			ctfObj.team_1_base_x = new LEFloatType();
+			ctfObj.team_1_base_y = new LEFloatType();
+			ctfObj.team_1_base_z = new LEFloatType();
 
-			ctfObj.team_2_base_x = {type: "le float", value: 0};
-			ctfObj.team_2_base_y = {type: "le float", value: 0};
-			ctfObj.team_2_base_z = {type: "le float", value: 0};
+			ctfObj.team_2_base_x = new LEFloatType();
+			ctfObj.team_2_base_y = new LEFloatType();
+			ctfObj.team_2_base_z = new LEFloatType();
 
 			this.fields = mergeObj(this.fields, ctfObj);
 		} else if(gamemode_id == 1) {
 			let tcObj = {
-				territory_count: {type: "ubyte", value: 0}
+				territory_count: new UByteType()
 			}
 
 			let count = packet.readUInt8(32);
 			for (let i = 0; i < count; i++) {
-				tcObj[`cp_${i}_x`] = {type: "le float", value: 0};
-				tcObj[`cp_${i}_y`] = {type: "le float", value: 0};
-				tcObj[`cp_${i}_z`] = {type: "le float", value: 0};
-				tcObj[`cp_${i}_state`] = {type: "ubyte", value: 0};
+				tcObj[`cp_${i}_x`] = new LEFloatType();
+				tcObj[`cp_${i}_y`] = new LEFloatType();
+				tcObj[`cp_${i}_z`] = new LEFloatType();
+				tcObj[`cp_${i}_state`] = new UByteType();
 			}
 
 			this.fields = mergeObj(this.fields, tcObj);

@@ -1,14 +1,15 @@
 const BasePacket = require("./BasePacket.js");
+const { UByteType } = require("../types");
 
 class SetColor extends BasePacket {
 	constructor(packet) {
 		super()
 
 		this.fields = {
-			player_id: {type: "ubyte", value: 0},
-			blue:      {type: "ubyte", value: 0},
-			green:     {type: "ubyte", value: 0},
-			red:       {type: "ubyte", value: 0},
+			player_id: new UByteType(),
+			blue:      new UByteType(),
+			green:     new UByteType(),
+			red:       new UByteType(),
 		};
 
 		if (packet)

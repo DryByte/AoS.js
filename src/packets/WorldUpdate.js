@@ -1,4 +1,5 @@
 const BasePacket = require("./BasePacket.js");
+const { LEFloatType } = require("../types");
 
 class WorldUpdate extends BasePacket {
 	constructor(packet) {
@@ -6,12 +7,12 @@ class WorldUpdate extends BasePacket {
 
 		this.fields = {};
 		for (let i = 0; i < Math.floor(packet.length/(6*4)); i++) {
-			this.fields[`player_${i}_pos_x`] = {type: "le float", value: 0};
-			this.fields[`player_${i}_pos_y`] = {type: "le float", value: 0};
-			this.fields[`player_${i}_pos_z`] = {type: "le float", value: 0};
-			this.fields[`player_${i}_ori_x`] = {type: "le float", value: 0};
-			this.fields[`player_${i}_ori_y`] = {type: "le float", value: 0};
-			this.fields[`player_${i}_ori_z`] = {type: "le float", value: 0};
+			this.fields[`player_${i}_pos_x`] = new LEFloatType();
+			this.fields[`player_${i}_pos_y`] = new LEFloatType();
+			this.fields[`player_${i}_pos_z`] = new LEFloatType();
+			this.fields[`player_${i}_ori_x`] = new LEFloatType();
+			this.fields[`player_${i}_ori_y`] = new LEFloatType();
+			this.fields[`player_${i}_ori_z`] = new LEFloatType();
 		}
 
 		if (packet)
