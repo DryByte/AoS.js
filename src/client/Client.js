@@ -2,6 +2,7 @@ const BaseClient = require("./BaseClient.js");
 const { mergeObj } = require("../utils.js");
 
 const ExistingPlayer = require("../packets/ExistingPlayer.js");
+const ChatMessage = require("../packets/ChatMessage.js");
 
 const JOINOBJECT = {
 	team: 0,
@@ -33,10 +34,22 @@ class Client extends BaseClient {
 		ex_p.fields.block_blue.value = send_obj.block_blue;
 		ex_p.fields.name.value = send_obj.name;
 
-		let packet_send = ex_p.encodeInfos();
-		packet_send.writeUInt8(9, 0);
+		let send_packet = ex_p.encodeInfos();
+		send_packet.writeUInt8(9, 0);
 
-		this.sendPacket(packet_send);
+		this.sendPacket(send_packet);
+	}
+
+	sendMessage(msg, _type) {
+		let msg_p = new ChatMessage();
+		msg_p.fields.player_id.value = this.localPlayer.playerId;
+		msg_p.fields.chat_type.value = _type;
+		msg_p.fields.chat_message.value = msg;
+
+		let send_packet = msg_p.encodeInfos();
+		send_packet.writeUInt8(17, 0);
+
+		this.sendPacket(send_packet);
 	}
 }
 

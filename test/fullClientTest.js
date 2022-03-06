@@ -31,6 +31,9 @@ describe("60s client test", function () {
 			client.joinGame({
 				name: "test bot"
 			});
+
+			client.sendMessage("hello, nice to meet you :D", 0);
+			client.sendMessage("LETS WIN THIS GAME, TEAM!!", 1);
 		});
 
 		client.on("ExistingPlayer", (fields) => {
@@ -63,6 +66,6 @@ describe("60s client test", function () {
 			console.log(p[0])
 		})*/
 
-		client.connect("127.0.0.1:32887");
+		client.connect("aos://1191278388:43887");
 	})
 })
