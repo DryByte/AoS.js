@@ -59,6 +59,11 @@ class BaseClient extends EventEmitter {
 			port: address[1]
 		}, 1, 3);
 
+		// "Server player"
+		// Used to do block actions most part of time
+		if (!this.game.players[32])
+			this.game.players[32] = new Player();
+
 		this.peer.on("connect", this.emit.bind(this, "connect"));
 		this.peer.on("disconnect", this.emit.bind(this, "disconnect"));
 

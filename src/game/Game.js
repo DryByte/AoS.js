@@ -2,7 +2,7 @@ const Team = require("./Team.js");
 
 class Game {
 	constructor(host) {
-		this.players = new Array(32);
+		this.players = new Array(33);
 		this.fog = new Array(3);
 		//this.map = new VXL();
 		this.blueTeam = new Team();
