@@ -28,7 +28,7 @@ class BaseClient extends EventEmitter {
 		this.options = defOpt;
 
 		this.game = new Game(this);
-		this.localPlayer = new Player();
+		this.localPlayerId;
 		this.client;
 		this.peer;
 	}

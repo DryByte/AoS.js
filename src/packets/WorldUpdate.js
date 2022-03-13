@@ -20,7 +20,7 @@ class WorldUpdate extends BasePacket {
 	}
 
 	organize(game) {
-		let playerC = Math.floor(Object.keys(this.fields).length/(6*4));
+		let playerC = Math.floor(Object.keys(this.fields).length/6);
 		for (let i = 0; i < playerC; i++) {
 			if (!game.players[i])
 				continue;

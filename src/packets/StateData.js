@@ -1,6 +1,7 @@
 const BasePacket = require("./BasePacket.js");
 const { mergeObj } = require("../utils.js");
 const { UByteType, StringType, LEFloatType } = require("../types");
+const Player = require("../game/Player.js");
 
 class StateData extends BasePacket {
 	constructor(packet) {
@@ -87,7 +88,8 @@ class StateData extends BasePacket {
 	}
 
 	organize(game) {
-		game.local.playerId = this.fields.player_id.value;
+		game.local.localPlayerId = this.fields.player_id.value;
+		game.players[game.local.localPlayerId] = new Player();
 
 		game.fog[2] = this.fields.fog_blue.value;
 		game.fog[1] = this.fields.fog_green.value;

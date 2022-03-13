@@ -3,7 +3,7 @@ const fs = require("fs")
 
 class Decompressor {
 	constructor() {
-		this.chunk_data = Buffer.alloc(1024*1024);
+		this.chunk_data = Buffer.alloc(2024*2024);
 		this.chunk_offset = 0;
 	}
 
