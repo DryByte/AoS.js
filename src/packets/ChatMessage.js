@@ -3,7 +3,7 @@ const { UByteType, StringType } = require("../types");
 
 class ChatMessage extends BasePacket {
 	constructor(packet) {
-		super()
+		super();
 
 		this.fields = {
 			player_id:    new UByteType(),

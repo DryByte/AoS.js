@@ -3,7 +3,7 @@ const { LEFloatType } = require("../types");
 
 class WorldUpdate extends BasePacket {
 	constructor(packet) {
-		super()
+		super();
 
 		this.fields = {};
 		for (let i = 0; i < Math.floor(packet.length/(6*4)); i++) {

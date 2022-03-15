@@ -3,7 +3,7 @@ const { UByteType } = require("../types");
 
 class SetColor extends BasePacket {
 	constructor(packet) {
-		super()
+		super();
 
 		this.fields = {
 			player_id: new UByteType(),

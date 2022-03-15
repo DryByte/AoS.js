@@ -2,11 +2,11 @@ const BasePacket = require("./BasePacket.js");
 
 class MapChunk extends BasePacket {
 	constructor(packet) {
-		super()
+		super();
 
 		this.fields = {
 			map_data: packet
-		}
+		};
 	}
 
 	organize(game){

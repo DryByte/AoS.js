@@ -3,7 +3,7 @@ const { UByteType } = require("../types");
 
 class PlayerLeft extends BasePacket {
 	constructor(packet) {
-		super()
+		super();
 
 		this.fields = {
 			player_left: new UByteType()

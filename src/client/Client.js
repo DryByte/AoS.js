@@ -14,7 +14,7 @@ const JOINOBJECT = {
 	block_green: 0,
 	block_blue: 0,
 	name: "Deuce"
-}
+};
 
 class Client extends BaseClient {
 	constructor() {

@@ -5,7 +5,7 @@ const Player = require("../game/Player.js");
 
 class StateData extends BasePacket {
 	constructor(packet) {
-		super()
+		super();
 
 		this.fields = {
 			player_id:    new UByteType(),
@@ -25,7 +25,7 @@ class StateData extends BasePacket {
 			team_2_name:  new StringType(10),
 
 			gamemode_id:  new UByteType()
-		}
+		};
 
 		// I know this is ugly, but cant figure out other ways...
 		let gamemode_id = packet.readUInt8(31);
@@ -70,7 +70,7 @@ class StateData extends BasePacket {
 		} else if(gamemode_id == 1) {
 			let tcObj = {
 				territory_count: new UByteType()
-			}
+			};
 
 			let count = packet.readUInt8(32);
 			for (let i = 0; i < count; i++) {
@@ -140,7 +140,7 @@ class StateData extends BasePacket {
 					y: this.fields[`cp_${i}_y`].value,
 					z: this.fields[`cp_${i}_z`].value,
 					state: this.fields[`cp_${i}_state`].value,
-				}
+				};
 			}
 		}
 

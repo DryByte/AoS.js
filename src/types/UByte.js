@@ -6,7 +6,7 @@ class UByteType {
 	}
 
 	read(buffer, offset=0) {
-		this.value = buffer.readInt8(offset)
+		this.value = buffer.readInt8(offset);
 		return this.value;
 	}
 

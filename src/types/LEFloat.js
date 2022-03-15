@@ -6,7 +6,7 @@ class LEFloatType {
 	}
 
 	read(buffer, offset=0) {
-		this.value = buffer.readFloatLE(offset)
+		this.value = buffer.readFloatLE(offset);
 		return this.value;
 	}
 

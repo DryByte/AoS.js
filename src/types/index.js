@@ -5,4 +5,4 @@ module.exports = {
 	StringType: require("./String.js"),
 	UByteType: require("./UByte.js"),
 	UInt32Type: require("./UInt32.js"),
-}
+};

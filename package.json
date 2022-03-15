@@ -4,7 +4,7 @@
   "description": "A library for interacting with Ace of Spades .75 protocol ",
   "main": "src/index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "npx eslint ./ && mocha"
   },
   "author": "DryByte",
   "license": "GPL-3.0 License",
@@ -12,6 +12,7 @@
     "enet": "^0.2.9"
   },
   "devDependencies": {
-    "canvas": "^2.9.0"
+    "canvas": "^2.9.0",
+    "eslint": "^8.11.0"
   }
 }

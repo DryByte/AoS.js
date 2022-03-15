@@ -6,7 +6,7 @@ class StringType {
 	}
 
 	read(buffer, offset=0) {
-		this.value = buffer.toString("utf8", offset, offset+(this.max_chars||buffer.length))
+		this.value = buffer.toString("utf8", offset, offset+(this.max_chars||buffer.length));
 		return this.value;
 	}
 

@@ -8,7 +8,7 @@ class MapStart extends BasePacket {
 
 		this.fields = {
 			map_size: new UInt32Type()
-		}
+		};
 
 		if (packet)
 			this.parseInfos(packet);

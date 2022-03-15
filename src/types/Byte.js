@@ -6,7 +6,7 @@ class ByteType {
 	}
 
 	read(buffer, offset=0) {
-		this.value = buffer.readUInt8(offset)
+		this.value = buffer.readUInt8(offset);
 		return this.value;
 	}
 

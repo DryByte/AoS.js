@@ -6,7 +6,7 @@ class UInt32Type {
 	}
 
 	read(buffer, offset=0) {
-		this.value = buffer.readUInt32LE(offset)
+		this.value = buffer.readUInt32LE(offset);
 		return this.value;
 	}
 

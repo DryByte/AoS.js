@@ -6,7 +6,7 @@ class LEIntType {
 	}
 
 	read(buffer, offset=0) {
-		this.value = buffer.readIntLE(offset, 4)
+		this.value = buffer.readIntLE(offset, 4);
 		return this.value;
 	}
 

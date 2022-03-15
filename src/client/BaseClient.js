@@ -15,7 +15,7 @@ const defaultOptions = {
 	client_v_minor: version.split(".")[1],
 	client_v_revision: version.split(".")[2],
 	client_v_info: "AoS.js",
-}
+};
 
 class BaseClient extends EventEmitter {
 	constructor(options) {
@@ -67,16 +67,16 @@ class BaseClient extends EventEmitter {
 		this.peer.on("connect", this.emit.bind(this, "connect"));
 		this.peer.on("disconnect", this.emit.bind(this, "disconnect"));
 
-		this.peer.on("message", (packet, chan) => {
+		this.peer.on("message", (packet) => {
 			this.readPacket(packet.data());
 			this.emit("rawPacket", packet.data());
-		})
+		});
 	}
 
 	readPacket(packet) {
 		if(PACKETS[packet[0]]) {
 			let pcket = new PACKETS[packet[0]](packet);
-			pcket.organize(this.game)
+			pcket.organize(this.game);
 			this.emit(pcket.constructor.name, pcket.fields);
 		}
 	}

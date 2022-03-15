@@ -4,7 +4,7 @@ const { ByteType, UByteType, StringType, UInt32Type } = require("../types");
 
 class ExistingPlayer extends BasePacket {
 	constructor(packet) {
-		super()
+		super();
 
 		this.fields = {
 			player_id:   new UByteType(),
@@ -16,7 +16,7 @@ class ExistingPlayer extends BasePacket {
 			block_green: new UByteType(),
 			block_red:   new UByteType(),
 			name:        new StringType(),
-		}
+		};
 
 		if (packet)
 			this.parseInfos(packet);
@@ -30,9 +30,9 @@ class ExistingPlayer extends BasePacket {
 		game.players[pId].playerId = pId;
 
 		switch(this.fields.team.value){
-			case -1:game.players[pId].team = game.spectatorTeam;break;
-			case 0: game.players[pId].team = game.blueTeam;     break;
-			case 1: game.players[pId].team = game.greenTeam;    break;
+		case -1:game.players[pId].team = game.spectatorTeam;break;
+		case 0: game.players[pId].team = game.blueTeam;     break;
+		case 1: game.players[pId].team = game.greenTeam;    break;
 		}
 
 		game.players[pId].weapon = this.fields.weapon.value;

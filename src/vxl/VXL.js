@@ -69,7 +69,7 @@ class VXL {
 		const block = {solid: 0, color: {a:0,r:0,g:0,b:0}};
 
 		block.solid = base&1;
-		block.color.a = base&255
+		block.color.a = base&255;
 		block.color.r = base>>8&255;
 		block.color.g = base>>16&255;
 		block.color.b = base>>24&255;
@@ -80,7 +80,7 @@ class VXL {
 	convertTo32(solid,r,g,b,a) {
 		//(solid)∨(a«1)∨(r«8)∨(g«16)∨(b«24)
 		let res = solid;
-		res |= a<<1
+		res |= a<<1;
 		res |= r << 8;
 		res |= g << 16;
 		res |= b << 24;
@@ -102,6 +102,7 @@ class VXL {
 				}
 				z=0;
 
+				/* eslint-disable-next-line no-constant-condition */
 				while(1) {
 					let number_4byte_chunks = this.data[offset];
 					let top_color_start = this.data[offset+1];
