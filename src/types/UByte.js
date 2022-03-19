@@ -6,13 +6,13 @@ class UByteType {
 	}
 
 	read(buffer, offset=0) {
-		this.value = buffer.readInt8(offset);
+		this.value = buffer.readUInt8(offset);
 		return this.value;
 	}
 
 	write(buffer, value, offset=0) {
 		this.value = value;
-		buffer.writeInt8(value, offset);
+		buffer.writeUInt8(value, offset);
 	}
 }
 

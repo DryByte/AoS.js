@@ -6,13 +6,13 @@ class ByteType {
 	}
 
 	read(buffer, offset=0) {
-		this.value = buffer.readUInt8(offset);
+		this.value = buffer.readInt8(offset);
 		return this.value;
 	}
 
 	write(buffer, value, offset=0) {
 		this.value = value;
-		buffer.writeUInt8(value, offset);
+		buffer.writeInt8(value, offset);
 	}
 }
 
