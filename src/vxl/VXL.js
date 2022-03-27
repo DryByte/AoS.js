@@ -25,6 +25,21 @@ class VXL {
 		return to_r;
 	}
 
+	// maybe merge getTopBlock and this...
+	getTopCoordinate(x,y) {
+		let to_r = 0;
+		for (let z = 0; z < 64; z++){
+			let block = this.getBlock(x,y,z);
+
+			if (block.solid) {
+				to_r = z;
+				break;
+			}
+		}
+
+		return to_r;
+	}
+
 	canBlockAction(x,y,z) {
 		if (x < 0 || x > 511)
 			return 0;

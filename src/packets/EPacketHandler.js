@@ -1,4 +1,7 @@
+const PositionData = require("./PositionData.js");
+const OrientationData = require("./OrientationData.js");
 const WorldUpdate = require("./WorldUpdate.js");
+const SetTool = require("./SetTool.js");
 const SetColor = require("./SetColor.js");
 const ExistingPlayer = require("./ExistingPlayer.js");
 const CreatePlayer = require("./CreatePlayer.js");
@@ -10,14 +13,14 @@ const MapChunk = require("./MapChunk.js");
 const PlayerLeft = require("./PlayerLeft.js");
 
 module.exports = [
-	false,//PositionData - Keep disabled until implement,
-	false,//OrientationData - Keep disabled until implement,
+	PositionData,
+	OrientationData,
 	WorldUpdate,
 	false,//InputData - Keep disabled until implement,
 	false,//WeaponInput - Keep disabled until implement,
 	false,//SetHP - Keep disabled until implement,
 	false,//Grenade - Keep disabled until implement,
-	false,//SetTool - Keep disabled until implement,
+	SetTool,
 	SetColor,
 	ExistingPlayer,
 	false,//ShortPlayerData - Keep disabled until implement,

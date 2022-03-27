@@ -12,7 +12,7 @@ class LEIntType {
 
 	write(buffer, value, offset=0) {
 		this.value = value;
-		buffer.writeIntLE(value, offset);
+		buffer.writeIntLE(value, offset, 4);
 	}
 }
 

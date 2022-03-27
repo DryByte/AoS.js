@@ -1,6 +1,11 @@
 module.exports = {
 	mergeObj: (base_obj, merge_obj) => {
-		let r_obj = base_obj;
+		let r_obj = {};
+
+		// copy
+		for (let key in base_obj) {
+			r_obj[key] = base_obj[key];
+		}
 
 		for (let key in merge_obj) {
 			r_obj[key] = merge_obj[key];

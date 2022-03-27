@@ -3,7 +3,12 @@ const { mergeObj } = require("../utils.js");
 
 const OrientationData = require("../packets/OrientationData.js");
 const ExistingPlayer = require("../packets/ExistingPlayer.js");
+const PositionData = require("../packets/PositionData.js");
+const BlockAction = require("../packets/BlockAction.js");
 const ChatMessage = require("../packets/ChatMessage.js");
+const InputData = require("../packets/InputData.js");
+const SetColor = require("../packets/SetColor.js");
+const SetTool = require("../packets/SetTool.js");
 
 const JOINOBJECT = {
 	team: 0,
@@ -14,6 +19,17 @@ const JOINOBJECT = {
 	block_green: 0,
 	block_blue: 0,
 	name: "Deuce"
+};
+
+const DEFAULTWALKINPUTS = {
+	up: false,
+	down: false,
+	left: false,
+	right: false,
+	jump: false,
+	crouch: false,
+	sneak: false,
+	sprint: false,
 };
 
 class Client extends BaseClient {
@@ -68,6 +84,73 @@ class Client extends BaseClient {
 
 		let send_packet = ori_p.encodeInfos();
 		send_packet.writeUInt8(1, 0);
+
+		this.sendPacket(send_packet);
+	}
+
+	setColor(r,g,b) {
+		let scolor_p = new SetColor();
+		scolor_p.fields.player_id.value = this.localPlayerId;
+		scolor_p.fields.red.value   = r;
+		scolor_p.fields.green.value = g;
+		scolor_p.fields.blue.value  = b;
+
+		let send_packet = scolor_p.encodeInfos();
+		send_packet.writeUInt8(8, 0);
+
+		this.sendPacket(send_packet);
+	}
+
+	setTool(tool_id) {
+		let stool_p = new SetTool();
+		stool_p.fields.player_id.value = this.localPlayerId;
+		stool_p.fields.tool.value = tool_id;
+
+		let send_packet = stool_p.encodeInfos();
+		send_packet.writeUInt8(7, 0);
+
+		this.sendPacket(send_packet);
+	}
+
+	placeBlock(x,y,z) {
+		let block_p = new BlockAction();
+		block_p.fields.player_id.value   = this.localPlayerId;
+		block_p.fields.action_type.value = 0;
+		block_p.fields.x.value = x;
+		block_p.fields.y.value = y;
+		block_p.fields.z.value = z;
+
+		let send_packet = block_p.encodeInfos();
+		send_packet.writeUInt8(13, 0);
+
+		this.sendPacket(send_packet);
+	}
+
+	setWalkInputs(wk_obj) {
+		if(!wk_obj) {
+			wk_obj = DEFAULTWALKINPUTS;
+		} else {
+			wk_obj = mergeObj(DEFAULTWALKINPUTS, wk_obj);
+		}
+
+		let input_p = new InputData();
+		input_p.fields.player_id.value = this.localPlayerId;
+		input_p.setKeyStates(wk_obj);
+
+		let send_packet = input_p.encodeInfos();
+		send_packet.writeUInt8(3, 0);
+
+		this.sendPacket(send_packet);
+	}
+
+	setPosition(x,y,z) {
+		let pos_p = new PositionData();
+		pos_p.fields.x.value = x;
+		pos_p.fields.y.value = y;
+		pos_p.fields.z.value = z;
+
+		let send_packet = pos_p.encodeInfos();
+		send_packet.writeUInt8(0, 0);
 
 		this.sendPacket(send_packet);
 	}
