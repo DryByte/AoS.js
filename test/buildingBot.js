@@ -1,6 +1,7 @@
 const {loadImage,createCanvas} = require("canvas");
 
 const AoS = require("../src");
+const OrientationData = AoS.Packets.OrientationData;
 let client = new AoS.Client();
 
 client.on("ready", () => {
@@ -13,9 +14,22 @@ client.on("connect", () => {
 
 client.on("StateData", (fields) => {
 	client.joinGame({
-		name: "HentaiBuilder"
+		name: "HentaiBuilder",
+		team: 0
 	});
 
+	// Anti afk in cool way (bigger head, small head, etc head)
+	setInterval(() => {
+		let ori_p = new OrientationData();
+		ori_p.fields.x.value = Math.random() * (Math.random()<0.5?-1:1);
+		ori_p.fields.y.value = Math.random() * (Math.random()<0.5?-1:1);
+		ori_p.fields.z.value = Math.random() * (Math.random()<0.5?-1:1);
+
+		let send_packet = ori_p.encodeInfos();
+		send_packet.writeUInt8(1, 0);
+
+		client.sendPacket(send_packet);
+	}, 50);
 	setTimeout(startBuilding, 5000);
 });
 
@@ -86,4 +100,4 @@ async function startBuilding() {
 	}
 }
 
-client.connect("aos://16777343:32887");
+client.connect("aos://127.0.0.1:32887");
