@@ -1,3 +1,7 @@
+/**
+ * UByte Type
+ * @category Types
+ */
 class UByteType {
 	constructor(skip_bytes=0) {
 		this.value;

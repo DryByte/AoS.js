@@ -7,16 +7,19 @@ const { version } = require("../../package.json");
 const { parseURI, mergeObj } = require("../utils.js");
 const PACKETS = require("../packets/EPacketHandler.js");
 
+// we will need to move this to a different file...
+/**
+ * @typedef {object} ClientOptions
+ * @property {string} [name] Bot's name
+ */
 const defaultOptions = {
-	name: "Deuce",
-
-	client_identifier: "C",
-	client_v_major: version.split(".")[0],
-	client_v_minor: version.split(".")[1],
-	client_v_revision: version.split(".")[2],
-	client_v_info: "AoS.js",
+	name: "Deuce"
 };
 
+/**
+ * @extends {EventEmitter}
+ * @category Client
+ */
 class BaseClient extends EventEmitter {
 	constructor(options) {
 		super();

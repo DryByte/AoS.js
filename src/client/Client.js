@@ -10,6 +10,15 @@ const InputData = require("../packets/InputData.js");
 const SetColor = require("../packets/SetColor.js");
 const SetTool = require("../packets/SetTool.js");
 
+/**
+ * @typedef {object} JoinObject Object with options for JoinPacket
+ * @property {number} [team] Id of the team to join
+ * @property {number} [weapon] Id of the choosed weapon
+ * @property {number} [held_item] Id of the item being hold
+ * @property {number} [block_red] Red color amount for block color
+ * @property {number} [block_green] Green color amount for block color
+ * @property {number} [block_blue] Blue color amount for block color
+ */
 const JOINOBJECT = {
 	team: 0,
 	weapon: 0,
@@ -17,10 +26,20 @@ const JOINOBJECT = {
 	kills: 0,
 	block_red: 0,
 	block_green: 0,
-	block_blue: 0,
-	name: "Deuce"
+	block_blue: 0
 };
 
+/**
+ * @typedef {object} WalkInputs Object with booleans for Walking Inputs
+ * @property {boolean} [up]
+ * @property {boolean} [down]
+ * @property {boolean} [left]
+ * @property {boolean} [right]
+ * @property {boolean} [jump]
+ * @property {boolean} [crouch]
+ * @property {boolean} [sneak]
+ * @property {boolean} [sprint]
+ */
 const DEFAULTWALKINPUTS = {
 	up: false,
 	down: false,
@@ -32,11 +51,24 @@ const DEFAULTWALKINPUTS = {
 	sprint: false,
 };
 
+/**
+ * Main Client class, containing high level functions to use. Use this to create your bot.
+ * @extends {BaseClient}
+ * @category Client
+ */
 class Client extends BaseClient {
-	constructor() {
-		super();
+	/**
+	 * @constructor
+	 * @param {ClientOptions} Options
+	 */
+	constructor(options) {
+		super(options);
 	}
 
+	/**
+	 * Join in a team, normally used after StateData packet.
+	 * @param {JoinObject} JoinObject
+	 */
 	joinGame(obj={}) {
 		let send_obj = mergeObj(JOINOBJECT, obj);
 
@@ -49,7 +81,7 @@ class Client extends BaseClient {
 		ex_p.fields.block_red.value = send_obj.block_red;
 		ex_p.fields.block_green.value = send_obj.block_green;
 		ex_p.fields.block_blue.value = send_obj.block_blue;
-		ex_p.fields.name.value = send_obj.name;
+		ex_p.fields.name.value = this.options.name;
 
 		let send_packet = ex_p.encodeInfos();
 		send_packet.writeUInt8(9, 0);
@@ -57,6 +89,11 @@ class Client extends BaseClient {
 		this.sendPacket(send_packet);
 	}
 
+	/**
+	 * Send a message in the chat.
+	 * @param {string} Message String representing the message text
+	 * @param {number} ChatType Chat type ID
+	 */
 	sendMessage(msg, _type) {
 		let msg_p = new ChatMessage();
 		msg_p.fields.player_id.value = this.localPlayerId;
@@ -69,6 +106,12 @@ class Client extends BaseClient {
 		this.sendPacket(send_packet);
 	}
 
+	/**
+	 * Look at a specific coordinate.
+	 * @param {number}
+	 * @param {number}
+	 * @param {number}
+	 */
 	lookAt(x,y,z) {
 		let bot_pos = this.game.players[this.localPlayerId].position;
 		x-=bot_pos.x;
@@ -88,6 +131,12 @@ class Client extends BaseClient {
 		this.sendPacket(send_packet);
 	}
 
+	/**
+	 * Set block color.
+	 * @param {number} Red Red color amount
+	 * @param {number} Green Green color amount
+	 * @param {number} Blue Blue color amount
+	 */
 	setColor(r,g,b) {
 		let scolor_p = new SetColor();
 		scolor_p.fields.player_id.value = this.localPlayerId;
@@ -101,6 +150,10 @@ class Client extends BaseClient {
 		this.sendPacket(send_packet);
 	}
 
+	/**
+	 * Set tool to hold.
+	 * @param {number} ToolId Tool Id
+	 */
 	setTool(tool_id) {
 		let stool_p = new SetTool();
 		stool_p.fields.player_id.value = this.localPlayerId;
@@ -112,6 +165,12 @@ class Client extends BaseClient {
 		this.sendPacket(send_packet);
 	}
 
+	/**
+	 * Try to place a block in a specific coordinate.
+	 * @param {number} X X Coordinate
+	 * @param {number} Y Y Coordinate
+	 * @param {number} Z Z Coordinate
+	 */
 	placeBlock(x,y,z) {
 		let block_p = new BlockAction();
 		block_p.fields.player_id.value   = this.localPlayerId;
@@ -126,6 +185,10 @@ class Client extends BaseClient {
 		this.sendPacket(send_packet);
 	}
 
+	/**
+	 * Set Client's inputs.
+	 * @param {WalkInputs} WalkInputs
+	 */
 	setWalkInputs(wk_obj) {
 		if(!wk_obj) {
 			wk_obj = DEFAULTWALKINPUTS;
@@ -143,6 +206,12 @@ class Client extends BaseClient {
 		this.sendPacket(send_packet);
 	}
 
+	/**
+	 * Set Client's position.
+	 * @param {number} X X Coordinate
+	 * @param {number} Y Y Coordinate
+	 * @param {number} Z Z Coordinate
+	 */
 	setPosition(x,y,z) {
 		let pos_p = new PositionData();
 		pos_p.fields.x.value = x;

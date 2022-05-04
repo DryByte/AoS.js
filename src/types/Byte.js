@@ -1,3 +1,7 @@
+/**
+ * Byte Type
+ * @category Types
+ */
 class ByteType {
 	constructor(skip_bytes=0) {
 		this.value;

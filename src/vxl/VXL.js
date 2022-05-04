@@ -1,16 +1,57 @@
 const Decompressor = require("./Decompressor.js");
 
+/**
+ * @typedef {object} BlockInfo
+ * @property {number} solid Solid state
+ * @property {object} color Color object
+ * @property {number} color.a Alpha color
+ * @property {number} color.r Red color
+ * @property {number} color.g Green color
+ * @property {number} color.b Blue color
+ */
+
+/**
+ * Class to manipulate .VXL files.
+ * @category VXL Manipulation
+ */
 class VXL {
 	constructor() {
+		/**
+		 * Decompressor class.
+		 * @type {Decompressor}
+		 */
 		this.decompressor = new Decompressor();
+
+		/**
+		 * Decompressed map chunks.
+		 * @type {Buffer}
+		 */
 		this.data;
+
+		/**
+		 * 1D Array with all block infos compacted into Uint32.
+		 * @type {Uint32Array}
+		 */
 		this.blocks = new Uint32Array(512*512*64);
 	}
 
+	/**
+	 * Get the block index in the 1D array, from 3D coordinate.
+	 * @param {number} X X Coordinate
+	 * @param {number} Y Y Coordinate
+	 * @param {number} Z Z Coordinate
+	 */
 	getBlockIndex(x,y,z) {
 		return (y*512*64)+(z*512)+x;
 	}
 
+	/**
+	 * Get first block from the sky block to the bottom.
+	 * @param {number} X X Coordinate
+	 * @param {number} Y Y Coordinate
+	 * 
+	 * @returns {BlockInfo} Block infos.
+	 */
 	getTopBlock(x,y) {
 		let to_r;
 		for (let z = 0; z < 64; z++){
@@ -26,6 +67,13 @@ class VXL {
 	}
 
 	// maybe merge getTopBlock and this...
+	/**
+	 * Get the coordinate from the first block from the sky to the bottom.
+	 * @param {number} X X Coordinate
+	 * @param {number} Y Y Coordinate
+	 * 
+	 * @returns {number} Block coordinates.
+	 */
 	getTopCoordinate(x,y) {
 		let to_r = 0;
 		for (let z = 0; z < 64; z++){
@@ -40,6 +88,14 @@ class VXL {
 		return to_r;
 	}
 
+	/**
+	 * Check if its possible to use Ace of Spades actions... Basically checks if the action will be inside the map limits.
+	 * @param {number} X X Coordinate
+	 * @param {number} Y Y Coordinate
+	 * @param {number} Z Z Coordinate
+	 * 
+	 * @returns {boolean}
+	 */
 	canBlockAction(x,y,z) {
 		if (x < 0 || x > 511)
 			return 0;
@@ -53,6 +109,12 @@ class VXL {
 		return 1;
 	}
 
+	/**
+	 * Remove a block from the map.
+	 * @param {number} X X Coordinate
+	 * @param {number} Y Y Coordinate
+	 * @param {number} Z Z Coordinate
+	 */
 	removeBlock(x,y,z) {
 		if(!this.canBlockAction(x, y, z))
 			return 0;
@@ -62,6 +124,10 @@ class VXL {
 		return 1;
 	}
 
+	/**
+	 * Add a block to the map.
+	 * @param {BlockInfo}
+	 */
 	addBlock(obj) {
 		let pos = obj.position;
 		let color = obj.color;
@@ -79,6 +145,14 @@ class VXL {
 		return 1;
 	}
 
+	/**
+	 * Get a block from specific coordinates.
+	 * @param {number} X X Coordinate
+	 * @param {number} Y Y Coordinate
+	 * @param {number} Z Z Coordinate
+	 * 
+	 * @returns {BlockInfo}
+	 */
 	getBlock(x,y,z) {
 		const base = this.blocks[this.getBlockIndex(x,y,z)];
 		const block = {solid: 0, color: {a:0,r:0,g:0,b:0}};
@@ -103,6 +177,9 @@ class VXL {
 		return res;
 	}
 
+	/**
+	 * Load VXL to the blocks array from data variable.
+	 */
 	loadVXL() {
 		let x = 0,
 			y = 0,

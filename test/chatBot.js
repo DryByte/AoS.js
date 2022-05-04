@@ -1,5 +1,5 @@
 const AoS = require("../src");
-let client = new AoS.Client();
+let client = new AoS.Client({name: "ChatBot"});
 
 client.on("ready", () => {
 	console.log("Created the client!");
@@ -11,9 +11,7 @@ client.on("connect", () => {
 });
 
 client.on("StateData", (fields) => {
-	client.joinGame({
-		name: "ChatBot"
-	});
+	client.joinGame();
 
 	client.sendMessage("Available commands: !follow", 0);
 });

@@ -1,5 +1,9 @@
 const Team = require("./Team.js");
 
+/**
+ * Class representing the Game config.
+ * @category Match Infos
+ */
 class Game {
 	constructor(host) {
 		this.players = new Array(33);

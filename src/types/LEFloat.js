@@ -1,3 +1,7 @@
+/**
+ * LE Float Type
+ * @category Types
+ */
 class LEFloatType {
 	constructor(skip_bytes=0) {
 		this.value;

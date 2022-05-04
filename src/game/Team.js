@@ -1,3 +1,7 @@
+/**
+ * Class representing a Team in-game.
+ * @category Match Infos
+ */
 class Team {
 	constructor() {
 		this.color = new Array(3);

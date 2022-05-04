@@ -1,3 +1,7 @@
+/**
+ * Class representing In-game players.
+ * @category Match Infos
+ */
 class Player {
 	constructor() {
 		this.name = "Deuce";

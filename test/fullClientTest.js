@@ -4,7 +4,7 @@ describe("60s client test", function () {
 	this.timeout(60000);
 
 	it("This is supposed to run the client until he crashes.", () => {
-		let client = new AoS.Client();
+		let client = new AoS.Client({name: "test bot"});
 
 		client.on("ready", () => {
 			console.log("Created the client!");
@@ -28,9 +28,7 @@ describe("60s client test", function () {
 			console.log("State data packet:");
 			console.log(fields);
 
-			client.joinGame({
-				name: "test bot"
-			});
+			client.joinGame();
 
 			client.sendMessage("hello, nice to meet you :D", 0);
 			client.sendMessage("LETS WIN THIS GAME, TEAM!!", 1);

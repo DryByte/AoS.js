@@ -2,7 +2,9 @@ const {loadImage,createCanvas} = require("canvas");
 
 const AoS = require("../src");
 const OrientationData = AoS.Packets.OrientationData;
-let client = new AoS.Client();
+let client = new AoS.Client({
+	name: "HentaiBuilder"
+});
 
 client.on("ready", () => {
 	console.log("Created the client!");
@@ -14,8 +16,7 @@ client.on("connect", () => {
 
 client.on("StateData", (fields) => {
 	client.joinGame({
-		name: "HentaiBuilder",
-		team: 0
+		team: 1
 	});
 
 	// Anti afk in cool way (bigger head, small head, etc head)

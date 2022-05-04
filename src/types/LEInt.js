@@ -1,3 +1,7 @@
+/**
+ * LE Int Type
+ * @category Types
+ */
 class LEIntType {
 	constructor(skip_bytes=0) {
 		this.value;

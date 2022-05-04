@@ -1,3 +1,7 @@
+/**
+ * String Type
+ * @category Types
+ */
 class StringType {
 	constructor(max_chars=0) {
 		this._value;

@@ -1,3 +1,7 @@
+/**
+ * UInt32 Type
+ * @category Types
+ */
 class UInt32Type {
 	constructor(skip_bytes=0) {
 		this.value;
