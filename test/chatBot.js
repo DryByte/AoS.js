@@ -33,6 +33,11 @@ client.on("ChatMessage", (fields) => {
 			followingId = fields.player_id.value;
 			console.log(`Started to follow: ${client.game.players[followingId].name}.`);
 			client.sendMessage(`/pm #${followingId} Now i will start following you.`, 1);
+			break;
+		case '!getout\x00':
+			client.sendMessage("Bye bye :(", 0);
+			client.disconnect();
+			break;
 	}
 });
 

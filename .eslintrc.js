@@ -26,5 +26,5 @@ module.exports = {
 			"always"
 		]
 	},
-	"ignorePatterns": ["/test/*"]
+	"ignorePatterns": ["/test/*", "/docs/*"]
 };

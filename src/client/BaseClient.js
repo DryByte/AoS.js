@@ -3,7 +3,6 @@ const EventEmitter = require("events");
 
 const Game = require("../game/Game.js");
 const Player = require("../game/Player.js");
-const { version } = require("../../package.json");
 const { parseURI, mergeObj } = require("../utils.js");
 const PACKETS = require("../packets/EPacketHandler.js");
 

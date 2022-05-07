@@ -223,6 +223,13 @@ class Client extends BaseClient {
 
 		this.sendPacket(send_packet);
 	}
+
+	/**
+	 * Disconnect the client from the server.
+	 */
+	disconnect() {
+		this.peer.disconnectLater();
+	}
 }
 
 module.exports = Client;
