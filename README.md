@@ -10,6 +10,7 @@ Check _test_ folder in the repository, in there you can check some examples. Rem
 The docs are generated using jsdoc and better-docs to generate a simple website. Follow the steps to use the docs on web:
 - Clone the repository: `git clone https://github.com/DryByte/AoS.js.git`
 - Then run: `npm i && npm run generate-docs`
+
 Now just open the file `docs/index.html` on your browser.
 
 ## Contributing

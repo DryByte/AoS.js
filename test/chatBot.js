@@ -1,5 +1,5 @@
 const AoS = require("../src");
-let client = new AoS.Client({name: "ChatBot"});
+let client = new AoS.Client({name: "AsterBot"});
 
 client.on("ready", () => {
 	console.log("Created the client!");
@@ -7,13 +7,13 @@ client.on("ready", () => {
 
 client.on("connect", () => {
 	console.log("Client connected to the server!");
-	setInterval(followLoop, 200);
+	setInterval(followLoop, 30);
 });
 
 client.on("StateData", (fields) => {
 	client.joinGame();
 
-	client.sendMessage("Available commands: !follow", 0);
+	client.sendMessage("Available commands: !follow and !nohomo", 0);
 });
 
 let followingId = undefined;
@@ -38,7 +38,16 @@ client.on("ChatMessage", (fields) => {
 			client.sendMessage("Bye bye :(", 0);
 			client.disconnect();
 			break;
+		case '!nohomo\x00':
+			client.sendLines([
+				"Im not gay but i want to suck a cock. Cocks look so juicy and tasty",
+				"when you think about it. Just imagine slurping up and",
+				"down a warm throbbing cock as a man stronger and bigger",
+				"than you pats your head and calls you a good boy.",
+				"Im entirely straight. I just have a penis fetish."
+			], 0, 3500);
+			break;
 	}
 });
 
-client.connect("aos://16777343:32887");
+client.connect("aos://3423334167:32887");

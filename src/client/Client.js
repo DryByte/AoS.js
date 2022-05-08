@@ -107,6 +107,21 @@ class Client extends BaseClient {
 	}
 
 	/**
+	 * Send multiple messages a once with a delay between them.
+	 * @param {array} Messages String array with the messages to be sent.
+	 * @param {number} ChatType Chat Type ID
+	 * @param {number} Delay Delay in ms between each message.
+	 */
+	sendLines(msg_array, _type, delay) {
+		for (let msg_i in msg_array) {
+			setTimeout(() => {
+				let content = msg_array[msg_i];
+				this.sendMessage(content, _type);
+			}, delay*msg_i);
+		}
+	}
+
+	/**
 	 * Look at a specific coordinate.
 	 * @param {number}
 	 * @param {number}
