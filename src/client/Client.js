@@ -4,11 +4,14 @@ const { mergeObj } = require("../utils.js");
 const OrientationData = require("../packets/OrientationData.js");
 const ExistingPlayer = require("../packets/ExistingPlayer.js");
 const PositionData = require("../packets/PositionData.js");
+const WeaponReload = require("../packets/WeaponReload.js");
+const WeaponInput = require("../packets/WeaponInput.js");
 const BlockAction = require("../packets/BlockAction.js");
 const ChatMessage = require("../packets/ChatMessage.js");
 const InputData = require("../packets/InputData.js");
 const SetColor = require("../packets/SetColor.js");
 const SetTool = require("../packets/SetTool.js");
+const Hit = require("../clientPackets/Hit.js");
 
 /**
  * @typedef {object} JoinObject Object with options for JoinPacket
@@ -235,6 +238,60 @@ class Client extends BaseClient {
 
 		let send_packet = pos_p.encodeInfos();
 		send_packet.writeUInt8(0, 0);
+
+		this.sendPacket(send_packet);
+	}
+
+	/**
+	 * Send a reload packet with custom clip ammo and reserve ammo.
+	 * @param {number} Clip AMMO in the Clip
+	 * @param {number} Reserver AMMO in the Reserve
+	 */
+	sendCustomReload(clip_ammo, reserve_ammo) {
+		let weapr = new WeaponReload();
+		weapr.fields.player_id.value = this.localPlayerId;
+		weapr.fields.clip.value = clip_ammo;
+		weapr.fields.reserve.value = reserve_ammo;
+
+		let send_packet = weapr.encodeInfos();
+		send_packet.writeUInt8(28, 0);
+
+		this.sendPacket(send_packet);
+	}
+
+	/**
+	 * Toggle/untoggle weapon firing.
+	 * @returns {boolean}
+	 */
+	toggleFiring() {
+		let localPlayer = this.game.players[this.localPlayerId];
+
+		let weain = new WeaponInput();
+		weain.fields.player_id.value = this.localPlayerId;
+		weain.setWeaponInput(!localPlayer.firing, 0);
+
+		weain.organize(this.game);
+
+		let send_packet = weain.encodeInfos();
+		send_packet.writeUInt8(4, 0);
+
+		this.sendPacket(send_packet);
+
+		return localPlayer.firing;
+	}
+
+	/**
+	 * Send an Hit packet to the server.
+	 * @param {number} PlayerId The player's ID to get hitted.
+	 * @param {number} HitType Hit type.
+	 */
+	hitPlayer(player_id, hit_type) {
+		let hitp = new Hit();
+		hitp.fields.player_id.value = player_id;
+		hitp.fields.hit_type.value = hit_type;
+
+		let send_packet = hitp.encodeInfos();
+		send_packet.writeUInt8(5, 0);
 
 		this.sendPacket(send_packet);
 	}

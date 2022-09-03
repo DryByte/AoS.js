@@ -1,6 +1,7 @@
 const PositionData = require("./PositionData.js");
 const OrientationData = require("./OrientationData.js");
 const WorldUpdate = require("./WorldUpdate.js");
+const WeaponInput = require("./WeaponInput.js");
 const SetTool = require("./SetTool.js");
 const SetColor = require("./SetColor.js");
 const ExistingPlayer = require("./ExistingPlayer.js");
@@ -11,13 +12,14 @@ const ChatMessage = require("./ChatMessage.js");
 const MapStart = require("./MapStart.js");
 const MapChunk = require("./MapChunk.js");
 const PlayerLeft = require("./PlayerLeft.js");
+const WeaponReload = require("./WeaponReload.js");
 
 module.exports = [
 	PositionData,
 	OrientationData,
 	WorldUpdate,
 	false,//InputData - Keep disabled until implement,
-	false,//WeaponInput - Keep disabled until implement,
+	WeaponInput,
 	false,//SetHP - Keep disabled until implement,
 	false,//Grenade - Keep disabled until implement,
 	SetTool,
@@ -41,7 +43,7 @@ module.exports = [
 	false,//IntelDrop - Keep disabled until implement,
 	false,//Restock - Keep disabled until implement,
 	false,//FogColour - Keep disabled until implement,
-	false,//WeaponReload - Keep disabled until implement,
+	WeaponReload,
 	false,//ChangeTeam - Keep disabled until implement,
 	false,//ChangeWeapon - Keep disabled until implement,
 ];
