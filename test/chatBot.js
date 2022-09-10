@@ -50,4 +50,4 @@ client.on("ChatMessage", (fields) => {
 	}
 });
 
-client.connect("aos://3423334167:32887");
+client.connect("aos://127.0.0.1:32887");

@@ -113,13 +113,21 @@ class StateData extends BasePacket {
 			game.blueTeam.score = this.fields.team_1_score.value;
 			game.greenTeam.score = this.fields.team_2_score.value;
 
-			game.blueTeam.intel[0] = this.fields.team_1_intel_x.value;
-			game.blueTeam.intel[1] = this.fields.team_1_intel_y.value;
-			game.blueTeam.intel[2] = this.fields.team_1_intel_z.value;
+			if (!this.fields.team_1_intel_holding) {
+				game.blueTeam.intel[0] = this.fields.team_1_intel_x.value;
+				game.blueTeam.intel[1] = this.fields.team_1_intel_y.value;
+				game.blueTeam.intel[2] = this.fields.team_1_intel_z.value;
+			} else {
+				game.blueTeam.intel = [new LEFloatType(),new LEFloatType(),new LEFloatType()];
+			}
 
-			game.greenTeam.intel[0] = this.fields.team_2_intel_x.value;
-			game.greenTeam.intel[1] = this.fields.team_2_intel_y.value;
-			game.greenTeam.intel[2] = this.fields.team_2_intel_z.value;
+			if (!this.fields.team_2_intel_holding) {
+				game.greenTeam.intel[0] = this.fields.team_2_intel_x.value;
+				game.greenTeam.intel[1] = this.fields.team_2_intel_y.value;
+				game.greenTeam.intel[2] = this.fields.team_2_intel_z.value;
+			} else {
+				game.greenTeam.intel = [new LEFloatType(),new LEFloatType(),new LEFloatType()];
+			}
 
 			game.blueTeam.base[0] = this.fields.team_1_base_x.value;
 			game.blueTeam.base[1] = this.fields.team_1_base_y.value;
