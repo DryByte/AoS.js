@@ -101,7 +101,7 @@ class Client extends BaseClient {
 		let msg_p = new ChatMessage();
 		msg_p.fields.player_id.value = this.localPlayerId;
 		msg_p.fields.chat_type.value = _type;
-		msg_p.fields.chat_message.value = msg;
+		msg_p.fields.chat_message.value = msg + '\x00';
 
 		let send_packet = msg_p.encodeInfos();
 		send_packet.writeUInt8(17, 0);
