@@ -5,6 +5,7 @@ class OrientationData extends BasePacket {
 	constructor(packet) {
 		super();
 
+		this.id = 1;
 		this.fields = {
 			x: new LEFloatType(),
 			y: new LEFloatType(),

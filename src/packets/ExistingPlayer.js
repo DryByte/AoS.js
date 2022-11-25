@@ -6,6 +6,7 @@ class ExistingPlayer extends BasePacket {
 	constructor(packet) {
 		super();
 
+		this.id = 9;
 		this.fields = {
 			player_id:   new UByteType(),
 			team:        new ByteType(),

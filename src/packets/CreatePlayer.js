@@ -6,6 +6,7 @@ class CreatePlayer extends BasePacket {
 	constructor(packet) {
 		super();
 
+		this.id = 12;
 		this.fields = {
 			player_id:   new UByteType(),
 			weapon:      new UByteType(),

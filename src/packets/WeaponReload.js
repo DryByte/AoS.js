@@ -5,6 +5,7 @@ class WeaponReload extends BasePacket {
 	constructor(packet) {
 		super();
 
+		this.id = 28;
 		this.fields = {
 			player_id: new UByteType(),
 			clip:      new UByteType(),

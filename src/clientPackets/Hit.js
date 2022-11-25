@@ -5,6 +5,7 @@ class Hit extends BasePacket {
 	constructor(packet) {
 		super();
 
+		this.id = 5;
 		this.fields = {
 			player_id: new UByteType(),
 			hit_type:  new UByteType(),

@@ -5,6 +5,7 @@ class KillAction extends BasePacket {
 	constructor(packet) {
 		super();
 
+		this.id = 16;
 		this.fields = {
 			player_id:      new UByteType(),
 			killer_id:      new UByteType(),

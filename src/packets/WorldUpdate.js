@@ -5,6 +5,7 @@ class WorldUpdate extends BasePacket {
 	constructor(packet) {
 		super();
 
+		this.id = 2;
 		this.fields = {};
 		for (let i = 0; i < Math.floor(packet.length/(6*4)); i++) {
 			this.fields[`player_${i}_pos_x`] = new LEFloatType();

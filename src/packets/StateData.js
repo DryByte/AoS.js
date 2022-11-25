@@ -7,6 +7,7 @@ class StateData extends BasePacket {
 	constructor(packet) {
 		super();
 
+		this.id = 15;
 		this.fields = {
 			player_id:    new UByteType(),
 

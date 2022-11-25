@@ -5,6 +5,7 @@ class PlayerLeft extends BasePacket {
 	constructor(packet) {
 		super();
 
+		this.id = 20;
 		this.fields = {
 			player_left: new UByteType()
 		};

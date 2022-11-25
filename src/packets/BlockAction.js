@@ -5,6 +5,7 @@ class BlockAction extends BasePacket {
 	constructor(packet) {
 		super();
 
+		this.id = 13;
 		this.fields = {
 			player_id:        new UByteType(),
 			action_type:      new UByteType(),

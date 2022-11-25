@@ -5,6 +5,7 @@ class InputData extends BasePacket {
 	constructor(packet) {
 		super();
 
+		this.id = 3;
 		this.fields = {
 			player_id: new UByteType(),
 			key_states: new UByteType()

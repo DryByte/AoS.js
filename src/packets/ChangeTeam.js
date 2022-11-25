@@ -5,6 +5,7 @@ class ChangeTeam extends BasePacket {
 	constructor(packet) {
 		super();
 
+		this.id = 29;
 		this.fields = {
 			player_id:    new UByteType(),
 			team_id:      new ByteType(),

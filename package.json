@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "better-docs": "^2.7.2",
-    "canvas": "^2.9.0",
+    "canvas": "^2.10.2",
     "eslint": "^8.11.0",
     "jsdoc": "~3.6.10"
   }

@@ -5,6 +5,7 @@ class ChangeWeapon extends BasePacket {
 	constructor(packet) {
 		super();
 
+		this.id = 30;
 		this.fields = {
 			player_id:    new UByteType(),
 			weapon_id:    new UByteType(),

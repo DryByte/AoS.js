@@ -5,6 +5,7 @@ class SetColor extends BasePacket {
 	constructor(packet) {
 		super();
 
+		this.id = 8;
 		this.fields = {
 			player_id: new UByteType(),
 			blue:      new UByteType(),

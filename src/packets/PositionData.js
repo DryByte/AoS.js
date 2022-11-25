@@ -5,6 +5,7 @@ class PositionData extends BasePacket {
 	constructor(packet) {
 		super();
 
+		this.id = 0;
 		this.fields = {
 			x: new LEFloatType(),
 			y: new LEFloatType(),

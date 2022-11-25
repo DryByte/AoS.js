@@ -6,6 +6,7 @@ class MapStart extends BasePacket {
 	constructor(packet) {
 		super();
 
+		this.id = 18;
 		this.fields = {
 			map_size: new UInt32Type()
 		};

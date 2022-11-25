@@ -22,13 +22,11 @@ client.on("StateData", (fields) => {
 	// Anti afk in cool way (bigger head, small head, etc head)
 	setInterval(() => {
 		let ori_p = new OrientationData();
-		ori_p.fields.x.value = Math.random() * (Math.random()<0.5?-1:1);
-		ori_p.fields.y.value = Math.random() * (Math.random()<0.5?-1:1);
-		ori_p.fields.z.value = Math.random() * (Math.random()<0.5?-1:1);
+		ori_p.setValue("x", Math.random() * (Math.random()<0.5?-1:1));
+		ori_p.setValue("y", Math.random() * (Math.random()<0.5?-1:1));
+		ori_p.setValue("z", Math.random() * (Math.random()<0.5?-1:1));
 
 		let send_packet = ori_p.encodeInfos();
-		send_packet.writeUInt8(1, 0);
-
 		client.sendPacket(send_packet);
 	}, 50);
 	setTimeout(startBuilding, 5000);

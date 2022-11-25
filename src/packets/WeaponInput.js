@@ -5,6 +5,7 @@ class WeaponInput extends BasePacket {
 	constructor(packet) {
 		super();
 
+		this.id = 4;
 		this.fields = {
 			player_id:    new UByteType(),
 			weapon_input: new UByteType()

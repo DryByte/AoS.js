@@ -5,6 +5,7 @@ class SetTool extends BasePacket {
 	constructor(packet) {
 		super();
 
+		this.id = 7;
 		this.fields = {
 			player_id: new UByteType(),
 			tool:      new UByteType(),

@@ -78,19 +78,17 @@ class Client extends BaseClient {
 		let send_obj = mergeObj(JOINOBJECT, obj);
 
 		let ex_p = new ExistingPlayer();
-		ex_p.fields.player_id.value = this.localPlayerId;
-		ex_p.fields.team.value = send_obj.team;
-		ex_p.fields.weapon.value = send_obj.weapon;
-		ex_p.fields.held_item.value = send_obj.held_item;
-		ex_p.fields.kills.value = send_obj.kills;
-		ex_p.fields.block_red.value = send_obj.block_red;
-		ex_p.fields.block_green.value = send_obj.block_green;
-		ex_p.fields.block_blue.value = send_obj.block_blue;
-		ex_p.fields.name.value = this.options.name;
+		ex_p.setValue("player_id", this.localPlayerId);
+		ex_p.setValue("team", send_obj.team);
+		ex_p.setValue("weapon", send_obj.weapon);
+		ex_p.setValue("held_item", send_obj.held_item);
+		ex_p.setValue("kills", send_obj.kills);
+		ex_p.setValue("block_red", send_obj.block_red);
+		ex_p.setValue("block_green", send_obj.block_green);
+		ex_p.setValue("block_blue", send_obj.block_blue);
+		ex_p.setValue("name", this.options.name);
 
 		let send_packet = ex_p.encodeInfos();
-		send_packet.writeUInt8(9, 0);
-
 		this.sendPacket(send_packet);
 	}
 
@@ -101,13 +99,11 @@ class Client extends BaseClient {
 	 */
 	sendMessage(msg, _type) {
 		let msg_p = new ChatMessage();
-		msg_p.fields.player_id.value = this.localPlayerId;
-		msg_p.fields.chat_type.value = _type;
-		msg_p.fields.chat_message.value = msg + '\x00';
+		msg_p.setValue("player_id", this.localPlayerId);
+		msg_p.setValue("chat_type", _type);
+		msg_p.setValue("chat_message", msg + '\x00');
 
 		let send_packet = msg_p.encodeInfos();
-		send_packet.writeUInt8(17, 0);
-
 		this.sendPacket(send_packet);
 	}
 
@@ -141,13 +137,11 @@ class Client extends BaseClient {
 		let mag = Math.sqrt(x*x+y*y+z*z);
 
 		let ori_p = new OrientationData();
-		ori_p.fields.x.value = x/mag;
-		ori_p.fields.y.value = y/mag;
-		ori_p.fields.z.value = z/mag;
+		ori_p.setValue("x", x/mag);
+		ori_p.setValue("y", y/mag);
+		ori_p.setValue("z", z/mag);
 
 		let send_packet = ori_p.encodeInfos();
-		send_packet.writeUInt8(1, 0);
-
 		this.sendPacket(send_packet);
 	}
 
@@ -159,14 +153,12 @@ class Client extends BaseClient {
 	 */
 	setColor(r,g,b) {
 		let scolor_p = new SetColor();
-		scolor_p.fields.player_id.value = this.localPlayerId;
-		scolor_p.fields.red.value   = r;
-		scolor_p.fields.green.value = g;
-		scolor_p.fields.blue.value  = b;
+		scolor_p.setValue("player_id", this.localPlayerId);
+		scolor_p.setValue("red", r);
+		scolor_p.setValue("green", g);
+		scolor_p.setValue("blue", b);
 
 		let send_packet = scolor_p.encodeInfos();
-		send_packet.writeUInt8(8, 0);
-
 		this.sendPacket(send_packet);
 	}
 
@@ -176,12 +168,10 @@ class Client extends BaseClient {
 	 */
 	setTool(tool_id) {
 		let stool_p = new SetTool();
-		stool_p.fields.player_id.value = this.localPlayerId;
-		stool_p.fields.tool.value = tool_id;
+		stool_p.setValue("player_id", this.localPlayerId);
+		stool_p.setValue("tool", tool_id);
 
 		let send_packet = stool_p.encodeInfos();
-		send_packet.writeUInt8(7, 0);
-
 		this.sendPacket(send_packet);
 	}
 
@@ -193,15 +183,13 @@ class Client extends BaseClient {
 	 */
 	placeBlock(x,y,z) {
 		let block_p = new BlockAction();
-		block_p.fields.player_id.value   = this.localPlayerId;
-		block_p.fields.action_type.value = 0;
-		block_p.fields.x.value = x;
-		block_p.fields.y.value = y;
-		block_p.fields.z.value = z;
+		block_p.setValue("player_id", this.localPlayerId);
+		block_p.setValue("action_type", 0);
+		block_p.setValue("x", x);
+		block_p.setValue("y", y);
+		block_p.setValue("z", z);
 
 		let send_packet = block_p.encodeInfos();
-		send_packet.writeUInt8(13, 0);
-
 		this.sendPacket(send_packet);
 	}
 
@@ -217,12 +205,10 @@ class Client extends BaseClient {
 		}
 
 		let input_p = new InputData();
-		input_p.fields.player_id.value = this.localPlayerId;
+		input_p.setValue("player_id", this.localPlayerId);
 		input_p.setKeyStates(wk_obj);
 
 		let send_packet = input_p.encodeInfos();
-		send_packet.writeUInt8(3, 0);
-
 		this.sendPacket(send_packet);
 	}
 
@@ -234,13 +220,11 @@ class Client extends BaseClient {
 	 */
 	setPosition(x,y,z) {
 		let pos_p = new PositionData();
-		pos_p.fields.x.value = x;
-		pos_p.fields.y.value = y;
-		pos_p.fields.z.value = z;
+		pos_p.setValue("x", x);
+		pos_p.setValue("y", y);
+		pos_p.setValue("z", z);
 
 		let send_packet = pos_p.encodeInfos();
-		send_packet.writeUInt8(0, 0);
-
 		this.sendPacket(send_packet);
 	}
 
@@ -251,13 +235,11 @@ class Client extends BaseClient {
 	 */
 	sendCustomReload(clip_ammo, reserve_ammo) {
 		let weapr = new WeaponReload();
-		weapr.fields.player_id.value = this.localPlayerId;
-		weapr.fields.clip.value = clip_ammo;
-		weapr.fields.reserve.value = reserve_ammo;
+		weapr.setValue("player_id", this.localPlayerId);
+		weapr.setValue("clip", clip_ammo);
+		weapr.setValue("reserve", reserve_ammo);
 
 		let send_packet = weapr.encodeInfos();
-		send_packet.writeUInt8(28, 0);
-
 		this.sendPacket(send_packet);
 	}
 
@@ -269,14 +251,12 @@ class Client extends BaseClient {
 		let localPlayer = this.game.players[this.localPlayerId];
 
 		let weain = new WeaponInput();
-		weain.fields.player_id.value = this.localPlayerId;
+		weain.setValue("player_id", this.localPlayerId);
 		weain.setWeaponInput(!localPlayer.firing, 0);
 
 		weain.organize(this.game);
 
 		let send_packet = weain.encodeInfos();
-		send_packet.writeUInt8(4, 0);
-
 		this.sendPacket(send_packet);
 
 		return localPlayer.firing;
@@ -289,12 +269,10 @@ class Client extends BaseClient {
 	 */
 	hitPlayer(player_id, hit_type) {
 		let hitp = new Hit();
-		hitp.fields.player_id.value = player_id;
-		hitp.fields.hit_type.value = hit_type;
+		hitp.setValue("player_id", player_id);
+		hitp.setValue("hit_type", hit_type);
 
 		let send_packet = hitp.encodeInfos();
-		send_packet.writeUInt8(5, 0);
-
 		this.sendPacket(send_packet);
 	}
 
@@ -311,12 +289,10 @@ class Client extends BaseClient {
 	 */
 	changeTeam(team_id) {
 		let teamp = new ChangeTeam();
-		teamp.fields.player_id.value = this.localPlayerId;
-		teamp.fields.team_id.value = team_id;
+		teamp.setValue("player_id", this.localPlayerId);
+		teamp.setValue("team_id", team_id);
 
 		let send_packet = teamp.encodeInfos();
-		send_packet.writeUInt8(29, 0);
-
 		this.sendPacket(send_packet);
 	}
 
@@ -326,12 +302,10 @@ class Client extends BaseClient {
 	 */
 	changeWeapon(weapon_id){
 		let weaponp = new ChangeWeapon();
-		weaponp.fields.player_id.value = this.localPlayerId;
-		weaponp.fields.weapon_id.value = weapon_id;
+		weaponp.setValue("player_id", this.localPlayerId);
+		weaponp.setValue("weapon_id", weapon_id);
 
 		let send_packet = weaponp.encodeInfos();
-		send_packet.writeUInt8(30, 0);
-
 		this.sendPacket(send_packet);
 	}
 }

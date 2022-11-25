@@ -4,6 +4,7 @@ class MapChunk extends BasePacket {
 	constructor(packet) {
 		super();
 
+		this.id = 19;
 		this.fields = {
 			map_data: packet
 		};
