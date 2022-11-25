@@ -39,6 +39,7 @@ class CreatePlayer extends BasePacket {
 		game.players[pId].position.z = this.fields.z.value;
 
 		game.players[pId].name = this.fields.name.value;
+		game.players[pId].dead = false;
 	}
 }
 

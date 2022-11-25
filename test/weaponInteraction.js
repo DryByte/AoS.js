@@ -52,4 +52,19 @@ async function tryKilling() {
 	client.toggleFiring();
 }
 
+client.on("KillAction", fields => {
+	console.log(fields);
+
+	let player = client.game.players[fields.player_id.value];
+	let killer = client.game.players[fields.killer_id.value];
+
+	console.log(player, killer);
+});
+
+client.on("CreatePlayer", fields => {
+	console.log(`Respawn ${fields.player_id.value}`);
+	let player = client.game.players[fields.player_id.value];
+	console.log(player);
+});
+
 client.connect("127.0.0.1:32887");

@@ -17,6 +17,7 @@ class Player {
 		this.firing = false;
 		this.tool = 0;
 		this.blocks = 50; // for client this is kinda useless...
+		this.dead = false;
 		this.team;
 	}
 }
