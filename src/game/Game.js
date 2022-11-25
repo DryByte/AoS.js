@@ -9,9 +9,9 @@ class Game {
 		this.players = new Array(33);
 		this.fog = new Array(3);
 		//this.map = new VXL();
-		this.blueTeam = new Team();
-		this.greenTeam = new Team();
-		this.spectatorTeam = new Team();
+		this.blueTeam = new Team(0);
+		this.greenTeam = new Team(1);
+		this.spectatorTeam = new Team(-1);
 
 		this.gamemode = 0;
 		this.cps;

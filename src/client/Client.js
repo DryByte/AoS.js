@@ -8,6 +8,7 @@ const WeaponReload = require("../packets/WeaponReload.js");
 const WeaponInput = require("../packets/WeaponInput.js");
 const BlockAction = require("../packets/BlockAction.js");
 const ChatMessage = require("../packets/ChatMessage.js");
+const ChangeTeam = require("../packets/ChangeTeam.js");
 const InputData = require("../packets/InputData.js");
 const SetColor = require("../packets/SetColor.js");
 const SetTool = require("../packets/SetTool.js");
@@ -301,6 +302,21 @@ class Client extends BaseClient {
 	 */
 	disconnect() {
 		this.peer.disconnectLater();
+	}
+
+	/**
+	 * Ask server to change team, server will send CreatePlayer with the new team.
+	 * @param {number} TeamId Team ID to change.
+	 */
+	changeTeam(team_id) {
+		let teamp = new ChangeTeam();
+		teamp.fields.player_id.value = this.localPlayerId;
+		teamp.fields.team_id.value = team_id;
+
+		let send_packet = teamp.encodeInfos();
+		send_packet.writeUInt8(29, 0);
+
+		this.sendPacket(send_packet);
 	}
 }
 

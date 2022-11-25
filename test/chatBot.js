@@ -13,7 +13,7 @@ client.on("connect", () => {
 client.on("StateData", (fields) => {
 	client.joinGame();
 
-	client.sendMessage("Available commands: !follow and !nohomo", 0);
+	client.sendMessage("Available commands: !follow, !nohomo and !switch", 0);
 });
 
 let followingId = undefined;
@@ -46,6 +46,18 @@ client.on("ChatMessage", (fields) => {
 				"than you pats your head and calls you a good boy.",
 				"Im entirely straight. I just have a penis fetish."
 			], 0, 3500);
+			break;
+		case '!switch\x00':
+			let team = client.game.players[client.localPlayerId].team.id;
+			let next_team = team;
+			if (team >= -1 && team < 1) {
+				next_team += 1;
+			} else {
+				next_team = -1;
+			}
+
+			client.changeTeam(next_team);
+			client.sendMessage("Changing team.", 0);
 			break;
 	}
 });

@@ -3,9 +3,10 @@
  * @category Match Infos
  */
 class Team {
-	constructor() {
+	constructor(id) {
 		this.color = new Array(3);
 		this.name = "";
+		this.id = id;
 		this.score = 0;
 
 		this.base = new Array(3);
