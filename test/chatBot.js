@@ -59,6 +59,9 @@ client.on("ChatMessage", (fields) => {
 			client.changeTeam(next_team);
 			client.sendMessage("Changing team.", 0);
 			break;
+		case '!smg\x00':
+			client.changeWeapon(1);
+			break;
 	}
 });
 

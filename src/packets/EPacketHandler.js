@@ -14,6 +14,8 @@ const MapStart = require("./MapStart.js");
 const MapChunk = require("./MapChunk.js");
 const PlayerLeft = require("./PlayerLeft.js");
 const WeaponReload = require("./WeaponReload.js");
+const ChangeTeam = require("./ChangeTeam.js");
+const ChangeWeapon = require("./ChangeWeapon.js");
 
 module.exports = [
 	PositionData,
@@ -45,6 +47,6 @@ module.exports = [
 	false,//Restock - Keep disabled until implement,
 	false,//FogColour - Keep disabled until implement,
 	WeaponReload,
-	false,//ChangeTeam - Keep disabled until implement,
-	false,//ChangeWeapon - Keep disabled until implement,
+	ChangeTeam,
+	ChangeWeapon,
 ];

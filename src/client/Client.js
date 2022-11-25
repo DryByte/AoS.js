@@ -5,6 +5,7 @@ const OrientationData = require("../packets/OrientationData.js");
 const ExistingPlayer = require("../packets/ExistingPlayer.js");
 const PositionData = require("../packets/PositionData.js");
 const WeaponReload = require("../packets/WeaponReload.js");
+const ChangeWeapon = require("../packets/ChangeWeapon.js");
 const WeaponInput = require("../packets/WeaponInput.js");
 const BlockAction = require("../packets/BlockAction.js");
 const ChatMessage = require("../packets/ChatMessage.js");
@@ -315,6 +316,21 @@ class Client extends BaseClient {
 
 		let send_packet = teamp.encodeInfos();
 		send_packet.writeUInt8(29, 0);
+
+		this.sendPacket(send_packet);
+	}
+
+	/**
+	 * Ask server to change weapon
+	 * @param {number} WeaponId Weapon ID to change.
+	 */
+	changeWeapon(weapon_id){
+		let weaponp = new ChangeWeapon();
+		weaponp.fields.player_id.value = this.localPlayerId;
+		weaponp.fields.weapon_id.value = weapon_id;
+
+		let send_packet = weaponp.encodeInfos();
+		send_packet.writeUInt8(30, 0);
 
 		this.sendPacket(send_packet);
 	}
