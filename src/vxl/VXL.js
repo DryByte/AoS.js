@@ -18,6 +18,7 @@ const Decompressor = require("./Decompressor.js");
 /**
  * @typedef {object} BlockInfo
  * @property {number} solid Solid state
+ * @property {Position} position Block position
  * @property {BlockColor} color Color object
  */
 
@@ -137,7 +138,7 @@ class VXL {
 
 	/**
 	 * Add a block to the map.
-	 * @param {BlockInfo}
+	 * @param {BlockInfo} Block to be added to the map
 	 */
 	addBlock(obj) {
 		let pos = obj.position;
@@ -253,7 +254,7 @@ class VXL {
 	 */
 	getBlock(x,y,z) {
 		const base = this.blocks[this.getBlockIndex(x,y,z)];
-		const block = {solid: 0, color: {a:0,r:0,g:0,b:0}};
+		const block = {solid: 0, position: {x,y,z}, color: {a:0,r:0,g:0,b:0}};
 
 		block.solid = base&1;
 		block.color.a = base&255;
