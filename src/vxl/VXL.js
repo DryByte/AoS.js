@@ -1,13 +1,24 @@
 const Decompressor = require("./Decompressor.js");
 
 /**
+ * @typedef {object} Position
+ * @property {number} x X axis
+ * @property {number} y Y axis
+ * @property {number} z Z axis
+ */
+
+/**
+ * @typedef {object} BlockColor
+ * @property {number} a Alpha color
+ * @property {number} r Red color
+ * @property {number} g Green color
+ * @property {number} b Blue color
+ */
+
+/**
  * @typedef {object} BlockInfo
  * @property {number} solid Solid state
- * @property {object} color Color object
- * @property {number} color.a Alpha color
- * @property {number} color.r Red color
- * @property {number} color.g Green color
- * @property {number} color.b Blue color
+ * @property {BlockColor} color Color object
  */
 
 /**
@@ -143,6 +154,93 @@ class VXL {
 
 		this.blocks[block_i] = infos_32;
 		return 1;
+	}
+
+	/**
+	 * Add a block line to the map.
+	 * @param {Position} Position1 Position of the start block
+	 * @param {Position} Position2 Position of the end block
+	 * @param {BlockColor} Color The block color
+	 */
+	addBlockLine(pos1, pos2, color) {
+		let c = {x: pos1.x, y: pos1.y, z: pos1.z};
+		let d = {x: pos2.x-c.x, y: pos2.y-c.y, z: pos2.z-c.z};
+
+		// direction indicators for building
+		let ixi, iyi, izi, dx, dy, dz, dxi, dyi, dzi;
+
+		ixi = d.x<0 ? -1 : 1;
+		iyi = d.y<0 ? -1 : 1;
+		izi = d.z<0 ? -1 : 1;
+
+		if (Math.abs(d.x) >= Math.abs(d.y) && Math.abs(d.x) >= Math.abs(d.z)) {
+			dxi = 1024;
+			dx  = 512;
+			dyi = !d.y ? 0x3fffffff/512 : Math.abs(d.x*1024/d.y);
+			dy  = dyi/2;
+			dzi = !d.z ? 0x3fffffff/512 : Math.abs(d.x*1024/d.z);
+			dz  = dzi/2;
+		} else if (Math.abs(d.y) >= Math.abs(d.z)) {
+			dyi = 1024;
+			dy  = 512;
+			dxi = !d.x ? 0x3fffffff/512 : Math.abs(d.y*1024/d.x);
+			dx  = dxi/2;
+			dzi = !d.z ? 0x3fffffff/512 : Math.abs(d.y*1024/d.z);
+			dz  = dzi/2;
+		} else {
+			dzi = 1024;
+			dz  = 512;
+			dxi = !d.x ? 0x3fffffff/512 : Math.abs(d.z*1024/d.x);
+			dx  = dxi/2;
+			dyi = !d.y ? 0x3fffffff/512 : Math.abs(d.z*1024/d.y);
+			dy  = dyi/2;
+		}
+
+		if (ixi >= 0)
+			dx = dxi-dx;
+		if (iyi >= 0)
+			dy = dyi-dy;
+		if (izi >= 0)
+			dz = dzi-dz;
+
+		let count = 0;
+		let blocks = [];
+		/* eslint-disable-next-line no-constant-condition */
+		while(1) {
+			blocks[count] = structuredClone(c);
+			if (count++ == 63)
+				break;
+
+			if (c.x == pos2.x && c.y == pos2.y && c.z == pos2.z)
+				break;
+
+			if (dz <= dx && dz <= dy) {
+				c.z += izi;
+				if (c.z < 0 || c.z >= 64)
+					break;
+				dz += dzi;
+			} else {
+				if (dx < dy) {
+					c.x += ixi;
+					if (c.x >= 512)
+						break;
+					dx += dxi;
+				} else {
+					c.y += iyi;
+					if (c.y >= 512)
+						break;
+					dy += dyi;
+				}
+			}
+		}
+
+	
+		for (let position of blocks) {
+			this.addBlock({position, color});
+		}
+
+		return blocks.length;
+
 	}
 
 	/**

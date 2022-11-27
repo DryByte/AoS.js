@@ -21,7 +21,7 @@ function createMap() {
 		}
 	}
 
-	for(let i = 0;i<32;i++) {
+	/*for(let i = 0;i<32;i++) {
 		if (client.game.players[i]) {
 			let team = client.game.players[i].team;
 			ctx.beginPath();
@@ -29,7 +29,7 @@ function createMap() {
 			ctx.fillRect(client.game.players[i].position.x, client.game.players[i].position.y, 5, 5);
 			ctx.fill();
 		}
-	}
+	}*/
 
 	const b = canvas.toBuffer('image/png');
 	fs.writeFileSync(`./test/maps/map_${Date.now()}.png`, b);
@@ -46,12 +46,18 @@ client.on("connect", () => {
 
 client.on("StateData", (fields) => {
 	createMap(true);
-	setInterval(createMap, 500);
+	setInterval(createMap, 1500);
 });
 
 client.on("BlockAction", (fields) => {
 	if (fields.player_id.value < 32) {
 		console.log(`${client.game.players[fields.player_id.value].name} did a block action at: ${fields.x.value}, ${fields.y.value}, ${fields.z.value}`);
+	}
+});
+
+client.on("BlockLine", (fields) => {
+	if (fields.player_id.value < 32) {
+		console.log(fields);
 	}
 })
 

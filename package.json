@@ -1,6 +1,6 @@
 {
   "name": "aos.js",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "A library for interacting with Ace of Spades .75 protocol ",
   "main": "src/index.js",
   "scripts": {
@@ -11,6 +11,9 @@
   "license": "GPL-3.0",
   "dependencies": {
     "enet": "^0.2.9"
+  },
+  "engines": {
+    "node": ">=17.0.0"
   },
   "devDependencies": {
     "better-docs": "^2.7.2",

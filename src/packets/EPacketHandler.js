@@ -7,6 +7,7 @@ const SetColor = require("./SetColor.js");
 const ExistingPlayer = require("./ExistingPlayer.js");
 const CreatePlayer = require("./CreatePlayer.js");
 const BlockAction = require("./BlockAction.js");
+const BlockLine = require("./BlockLine.js");
 const StateData = require("./StateData.js");
 const KillAction = require("./KillAction.js");
 const ChatMessage = require("./ChatMessage.js");
@@ -32,7 +33,7 @@ module.exports = [
 	false,//MoveObject - Keep disabled until implement,
 	CreatePlayer,
 	BlockAction,
-	false,//BlockLine - Keep disabled until implement,
+	BlockLine,
 	StateData,
 	KillAction,
 	ChatMessage,
