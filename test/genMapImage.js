@@ -21,15 +21,20 @@ function createMap() {
 		}
 	}
 
-	/*for(let i = 0;i<32;i++) {
-		if (client.game.players[i]) {
-			let team = client.game.players[i].team;
-			ctx.beginPath();
-			ctx.fillStyle = `rgb(${team.color[0]},${team.color[1]},${team.color[2]})`;
-			ctx.fillRect(client.game.players[i].position.x, client.game.players[i].position.y, 5, 5);
-			ctx.fill();
-		}
-	}*/
+	for(let i = 0;i<32;i++) {
+		let player = client.game.players[i];
+		console.log(player);
+		if (!player)
+			continue;
+		let team = client.game.players[i].team;
+		if (!team)
+			continue;
+
+		ctx.beginPath();
+		ctx.fillStyle = `rgb(${team.color[0]},${team.color[1]},${team.color[2]})`;
+		ctx.fillRect(player.position.x, player.position.y, 5, 5);
+		ctx.fill();
+	}
 
 	const b = canvas.toBuffer('image/png');
 	fs.writeFileSync(`./test/maps/map_${Date.now()}.png`, b);
@@ -46,7 +51,7 @@ client.on("connect", () => {
 
 client.on("StateData", (fields) => {
 	createMap(true);
-	setInterval(createMap, 1500);
+	setInterval(createMap, 15000);
 });
 
 client.on("BlockAction", (fields) => {
