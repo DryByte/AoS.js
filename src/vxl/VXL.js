@@ -277,6 +277,27 @@ class VXL {
 	}
 
 	/**
+	 * Check if block is visible (a.k.a. a surface) in any of axis.
+	 * @param {number} X X Coordinate
+	 * @param {number} Y Y Coordinate
+	 * @param {number} Z Z Coordinate
+	 * @returns {boolean}
+	 */
+	isSurface(x,y,z) {
+		if (!this.getBlock(x,y,z).solid) return false;
+		if (z == 0) return true;
+
+		if (x > 0 && !this.getBlock(x-1,y,z).solid)     return true;
+		if (x+1 < 512 && !this.getBlock(x+1,y,z).solid) return true;
+		if (y > 0 && !this.getBlock(x,y-1,z).solid)     return true;
+		if (y+1 < 512 && !this.getBlock(x,y+1,z).solid) return true;
+		if (z > 0 && !this.getBlock(x,y,z-1).solid)     return true;
+		if (z+1 < 64 && !this.getBlock(x,y,z+1).solid)  return true;
+
+		return false;
+	}
+
+	/**
 	 * Load VXL to the blocks array from data variable.
 	 */
 	loadVXL() {
@@ -340,6 +361,91 @@ class VXL {
 		}
 
 		return 1;
+	}
+
+	/**
+	 * Save a VXL map loaded to a Buffer
+	 * @returns {Buffer}
+	 */
+	saveVXL() {
+		let buffer = Buffer.alloc(1024*1024*10);
+		let offset = 0;
+		for (let y = 0; y < 512; y++) {
+			for (let x = 0; x < 512; x++) {
+				let z = 0;
+
+				while (z < 64) {
+					let air_start = z;
+					while (z < 64 && !this.getBlock(x,y,z).solid)
+						z+=1;
+
+					let top_colors_start = z;
+					while (z < 64 && this.isSurface(x,y,z))
+						z+=1;
+					let top_colors_end = z;
+
+					while (z < 64 && this.getBlock(x,y,z).solid && !this.isSurface(x,y,z))
+						z+=1;
+
+					let bottom_colors_start = z;
+					let _z = z;
+					while (_z < 64 && this.isSurface(x,y,_z))
+						_z+=1;
+
+					if (_z != 64) {
+						while (this.isSurface(x,y,z))
+							z+=1;
+					}
+					let bottom_colors_end = z;
+
+					let top_colors_len    = top_colors_end    - top_colors_start;
+					let bottom_colors_len = bottom_colors_end - bottom_colors_start;
+					let colors = top_colors_len+bottom_colors_len;
+
+					if (z == 64) {
+						buffer.writeUInt8(0, offset);
+						offset+=1;
+					} else {
+						buffer.writeUInt8(colors+1, offset);
+						offset+=1;
+					}
+
+					buffer.writeUInt8(top_colors_start, offset);
+					offset+=1;
+					buffer.writeUInt8(top_colors_end-1, offset);
+					offset+=1;
+					buffer.writeUInt8(air_start, offset);
+					offset+=1;
+
+					for (_z = 0; _z < top_colors_len; _z++) {
+						let block = this.getBlock(x,y,top_colors_start+_z).color;
+						buffer.writeUInt8(block.b, offset);
+						offset+=1;
+						buffer.writeUInt8(block.g, offset);
+						offset+=1;
+						buffer.writeUInt8(block.r, offset);
+						offset+=1;
+						buffer.writeUInt8(block.a, offset);
+						offset+=1;
+					}
+
+					for (_z = 0; _z < bottom_colors_len; _z++) {
+						let block = this.getBlock(x,y,bottom_colors_start+_z).color;
+						buffer.writeUInt8(block.b, offset);
+						offset+=1;
+						buffer.writeUInt8(block.g, offset);
+						offset+=1;
+						buffer.writeUInt8(block.r, offset);
+						offset+=1;
+						buffer.writeUInt8(block.a, offset);
+						offset+=1;
+					}
+				}
+			}
+		}
+
+		console.log(buffer);
+		return buffer;
 	}
 }
 
