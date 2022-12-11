@@ -444,7 +444,6 @@ class VXL {
 			}
 		}
 
-		console.log(buffer);
 		return buffer;
 	}
 }
