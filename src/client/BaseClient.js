@@ -77,9 +77,9 @@ class BaseClient extends EventEmitter {
 
 	readPacket(packet) {
 		if(PACKETS[packet[0]]) {
-			let pcket = new PACKETS[packet[0]](packet);
-			pcket.organize(this.game);
-			this.emit(pcket.constructor.name, pcket.fields);
+			let Packet = new PACKETS[packet[0]](packet);
+			Packet.organize(this.game);
+			this.emit(Packet.constructor.name, Packet.fields);
 		}
 	}
 

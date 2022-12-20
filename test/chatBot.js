@@ -27,6 +27,14 @@ function followLoop() {
 	}
 }
 
+client.on("PlayerJoin", (fields) => {
+	client.sendMessage(`Welcome ${fields.name.value}!`, 0);
+});
+
+client.on("PlayerLeft", (fields) => {
+	client.sendMessage(`Bye bye #${fields.player_id.value} :(`, 0);
+});
+
 client.on("ChatMessage", (fields) => {
 	switch(fields.chat_message.value) {
 		case '!follow\x00':

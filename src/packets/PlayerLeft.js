@@ -7,7 +7,7 @@ class PlayerLeft extends BasePacket {
 
 		this.id = 20;
 		this.fields = {
-			player_left: new UByteType()
+			player_id: new UByteType()
 		};
 
 		if (packet)
@@ -15,7 +15,7 @@ class PlayerLeft extends BasePacket {
 	}
 
 	organize(game) {
-		game.players[this.fields.player_left.value] = undefined;
+		game.players[this.fields.player_id.value] = undefined;
 	}
 }
 

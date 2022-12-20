@@ -23,8 +23,10 @@ class CreatePlayer extends BasePacket {
 
 	organize(game) {
 		let pId = this.fields.player_id.value;
-		if (!game.players[pId])
+		if (!game.players[pId]) {
+			game.local.emit("PlayerJoin", this.fields);
 			game.players[pId] = new Player();
+		}
 
 		game.players[pId].playerId = pId;
 		game.players[pId].weapon = this.fields.weapon.value;
