@@ -54,6 +54,26 @@ describe("60s client test", function () {
 			console.log(fields);
 		});
 
+		client.on("IntelCapture", (fields) => {
+			console.log("Intel capture:");
+			console.log(fields);
+		});
+
+		client.on("WinCapture", (fields) => {
+			console.log("Capture for the win:");
+			console.log(fields);
+		});
+
+		client.on("IntelPickup", (fields) => {
+			console.log("Intel pickup:");
+			console.log(fields);
+		});
+
+		client.on("IntelDrop", (fields) => {
+			console.log("Intel drop:");
+			console.log(fields);
+		});
+
 		/*client.on("WorldUpdate", (fields) => {
 			//We access client.game.players because have
 			//better values and will display who is playing
@@ -64,6 +84,6 @@ describe("60s client test", function () {
 			console.log(p[0])
 		})*/
 
-		client.connect("aos://1191278388:43887");
+		client.connect("aos://16777343:32887");
 	})
 })

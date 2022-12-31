@@ -32,6 +32,10 @@ class BasePacket {
 		this.fields[field].value = value;
 	}
 
+	getValue(field) {
+		return this.fields[field].value;
+	}
+
 	organize(){}
 }
 

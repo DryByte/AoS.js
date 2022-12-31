@@ -8,6 +8,7 @@ class Team {
 		this.name = "";
 		this.id = id;
 		this.score = 0;
+		this.hasIntel = null;
 
 		this.base = new Array(3);
 		this.intel = new Array(3);

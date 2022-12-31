@@ -14,6 +14,9 @@ const ChatMessage = require("./ChatMessage.js");
 const MapStart = require("./MapStart.js");
 const MapChunk = require("./MapChunk.js");
 const PlayerLeft = require("./PlayerLeft.js");
+const IntelCapture = require("./IntelCapture.js");
+const IntelPickup = require("./IntelPickup.js");
+const IntelDrop = require("./IntelDrop.js");
 const WeaponReload = require("./WeaponReload.js");
 const ChangeTeam = require("./ChangeTeam.js");
 const ChangeWeapon = require("./ChangeWeapon.js");
@@ -42,9 +45,9 @@ module.exports = [
 	PlayerLeft,
 	false,//TerritoryCapture - Keep disabled until implement,
 	false,//ProgressBar - Keep disabled until implement,
-	false,//IntelCapture - Keep disabled until implement,
-	false,//IntelPickup - Keep disabled until implement,
-	false,//IntelDrop - Keep disabled until implement,
+	IntelCapture,
+	IntelPickup,
+	IntelDrop,
 	false,//Restock - Keep disabled until implement,
 	false,//FogColour - Keep disabled until implement,
 	WeaponReload,
