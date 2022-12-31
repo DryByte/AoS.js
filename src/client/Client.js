@@ -308,6 +308,21 @@ class Client extends BaseClient {
 		let send_packet = weaponp.encodeInfos();
 		this.sendPacket(send_packet);
 	}
+
+	/**
+	 * Get all players connected to the server 
+	 */
+	getOnlinePlayers() {
+		let players = [];
+		for (let player of this.game.players) {
+			if (!player)
+				continue;
+
+			players.push(player);
+		}
+
+		return players;
+	}
 }
 
 module.exports = Client;
