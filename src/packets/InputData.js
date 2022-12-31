@@ -16,7 +16,7 @@ class InputData extends BasePacket {
 	}
 
 	organize(game) {
-		game.players[this.fields.player_id.value].inputs = this.getKeyStates();
+		game.players[this.getValue("player_id")].inputs = this.getKeyStates();
 	}
 
 	setKeyStates(state_obj) {
@@ -36,7 +36,7 @@ class InputData extends BasePacket {
 		let current_state = 0;
 
 		for (let v in r_obj) {
-			r_obj[v] = (this.fields.key_states.value >> current_state) & 1;
+			r_obj[v] = (this.getValue("key_states") >> current_state) & 1;
 			current_state+=1;
 		}
 

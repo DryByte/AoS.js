@@ -26,12 +26,12 @@ class WorldUpdate extends BasePacket {
 			if (!game.players[i])
 				continue;
 
-			game.players[i].position.x = this.fields[`player_${i}_pos_x`].value;
-			game.players[i].position.y = this.fields[`player_${i}_pos_y`].value;
-			game.players[i].position.z = this.fields[`player_${i}_pos_z`].value;
-			game.players[i].orientation.x = this.fields[`player_${i}_ori_x`].value;
-			game.players[i].orientation.y = this.fields[`player_${i}_ori_y`].value;
-			game.players[i].orientation.z = this.fields[`player_${i}_ori_z`].value;
+			game.players[i].position.x = this.getValue(`player_${i}_pos_x`);
+			game.players[i].position.y = this.getValue(`player_${i}_pos_y`);
+			game.players[i].position.z = this.getValue(`player_${i}_pos_z`);
+			game.players[i].orientation.x = this.getValue(`player_${i}_ori_x`);
+			game.players[i].orientation.y = this.getValue(`player_${i}_ori_y`);
+			game.players[i].orientation.z = this.getValue(`player_${i}_ori_z`);
 		}
 	}
 }

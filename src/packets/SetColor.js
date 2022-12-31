@@ -21,10 +21,10 @@ class SetColor extends BasePacket {
 		if (this.fields.player_id.value > 31)
 			this.fields.player_id.value = 32;
 
-		let playerC = game.players[this.fields.player_id.value];
-		playerC.blockColor[0] = this.fields.red.value;
-		playerC.blockColor[1] = this.fields.green.value;
-		playerC.blockColor[2] = this.fields.blue.value;
+		let playerC = game.players[this.getValue("player_id")];
+		playerC.blockColor[0] = this.getValue("red");
+		playerC.blockColor[1] = this.getValue("green");
+		playerC.blockColor[2] = this.getValue("blue");
 	}
 }
 

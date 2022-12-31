@@ -24,27 +24,27 @@ class ExistingPlayer extends BasePacket {
 	}
 
 	organize(game) {
-		let pId = this.fields.player_id.value;
+		let pId = this.getValue("player_id");
 		if (!game.players[pId])
 			game.players[pId] = new Player();
 
 		game.players[pId].playerId = pId;
 
-		switch(this.fields.team.value){
+		switch(this.getValue("team")){
 		case -1:game.players[pId].team = game.spectatorTeam;break;
 		case 0: game.players[pId].team = game.blueTeam;     break;
 		case 1: game.players[pId].team = game.greenTeam;    break;
 		}
 
-		game.players[pId].weapon = this.fields.weapon.value;
-		game.players[pId].tool = this.fields.held_item.value;
-		game.players[pId].kills = this.fields.kills.value;
+		game.players[pId].weapon = this.getValue("weapon");
+		game.players[pId].tool = this.getValue("held_item");
+		game.players[pId].kills = this.getValue("kills");
 
-		game.players[pId].blockColor[0] = this.fields.block_red.value;
-		game.players[pId].blockColor[1] = this.fields.block_green.value;
-		game.players[pId].blockColor[2] = this.fields.block_blue.value;
+		game.players[pId].blockColor[0] = this.getValue("block_red");
+		game.players[pId].blockColor[1] = this.getValue("block_green");
+		game.players[pId].blockColor[2] = this.getValue("block_blue");
 
-		game.players[pId].name = this.fields.name.value;
+		game.players[pId].name = this.getValue("name");
 	}
 }
 

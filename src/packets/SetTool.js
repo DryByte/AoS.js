@@ -19,8 +19,8 @@ class SetTool extends BasePacket {
 		if (this.fields.player_id.value > 31)
 			this.fields.player_id.value = 32;
 
-		let playerC = game.players[this.fields.player_id.value];
-		playerC.tool = this.fields.tool.value;
+		let playerC = game.players[this.getValue("player_id")];
+		playerC.tool = this.getValue("tool");
 	}
 }
 

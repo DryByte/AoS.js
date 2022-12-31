@@ -22,14 +22,14 @@ class CreatePlayer extends BasePacket {
 	}
 
 	organize(game) {
-		let pId = this.fields.player_id.value;
+		let pId = this.getValue("player_id");
 		if (!game.players[pId]) {
 			game.local.emit("PlayerJoin", this.fields);
 			game.players[pId] = new Player();
 		}
 
 		game.players[pId].playerId = pId;
-		game.players[pId].weapon = this.fields.weapon.value;
+		game.players[pId].weapon = this.getValue("weapon");
 
 		switch(this.fields.team.value){
 		case -1:game.players[pId].team = game.spectatorTeam;break;
@@ -37,11 +37,11 @@ class CreatePlayer extends BasePacket {
 		case 1: game.players[pId].team = game.greenTeam;    break;
 		}
 
-		game.players[pId].position.x = this.fields.x.value;
-		game.players[pId].position.y = this.fields.y.value;
-		game.players[pId].position.z = this.fields.z.value;
+		game.players[pId].position.x = this.getValue("x");
+		game.players[pId].position.y = this.getValue("y");
+		game.players[pId].position.z = this.getValue("z");
 
-		game.players[pId].name = this.fields.name.value;
+		game.players[pId].name = this.getValue("name");
 		game.players[pId].dead = false;
 	}
 }

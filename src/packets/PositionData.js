@@ -18,9 +18,9 @@ class PositionData extends BasePacket {
 
 	organize(game) {
 		game.players[game.local.localPlayerId].position = {
-			x: this.fields.x.value,
-			y: this.fields.y.value,
-			z: this.fields.z.value
+			x: this.getValue("x"),
+			y: this.getValue("y"),
+			z: this.getValue("z")
 		};
 	}
 }

@@ -17,9 +17,9 @@ class WeaponReload extends BasePacket {
 	}
 
 	organize(game) {
-		let playerC = game.players[this.fields.player_id.value];
-		playerC.weaponClip = this.fields.clip.value;
-		playerC.weaponReserve = this.fields.reserve.value;
+		let playerC = game.players[this.getValue("player_id")];
+		playerC.weaponClip = this.getValue("clip");
+		playerC.weaponReserve = this.getValue("reserve");
 	}
 }
 

@@ -16,11 +16,11 @@ class ChangeWeapon extends BasePacket {
 	}
 
 	organize(game) {
-		let player = game.players[this.fields.player_id.value];
+		let player = game.players[this.getValue("player_id")];
 		if (!player)
 			return;
 
-		player.weapon = this.fields.weapon_id.value;
+		player.weapon = this.getValue("weapon_id");
 	}
 }
 

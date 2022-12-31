@@ -19,7 +19,7 @@ class BlockAction extends BasePacket {
 	}
 
 	organize(game) {
-		let pId = this.fields.player_id.value;
+		let pId = this.getValue("player_id");
 
 		if (pId > 31)
 			pId = 32;
@@ -27,11 +27,11 @@ class BlockAction extends BasePacket {
 		if (!game.players[pId])
 			return;
 
-		let x = this.fields.x.value,
-			y = this.fields.y.value,
-			z = this.fields.z.value;
+		let x = this.getValue("x"),
+			y = this.getValue("y"),
+			z = this.getValue("z");
 
-		switch(this.fields.action_type.value) {
+		switch(this.getValue("action_type")) {
 		// build
 		case 0:
 			if (pId < 32)

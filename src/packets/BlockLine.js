@@ -21,7 +21,7 @@ class BlockLine extends BasePacket {
 	}
 
 	organize(game) {
-		let pId = this.fields.player_id.value;
+		let pId = this.getValue("player_id");
 
 		if (pId > 31)
 			pId = 32;
@@ -30,15 +30,15 @@ class BlockLine extends BasePacket {
 			return;
 
 		let pos1 = {
-			x: this.fields.x1.value,
-			y: this.fields.y1.value,
-			z: this.fields.z1.value
+			x: this.getValue("x1"),
+			y: this.getValue("y1"),
+			z: this.getValue("z1")
 		};
 
 		let pos2 = {
-			x: this.fields.x2.value,
-			y: this.fields.y2.value,
-			z: this.fields.z2.value
+			x: this.getValue("x2"),
+			y: this.getValue("y2"),
+			z: this.getValue("z2")
 		};
 
 		let color = game.players[pId].blockColor;

@@ -89,66 +89,66 @@ class StateData extends BasePacket {
 	}
 
 	organize(game) {
-		game.local.localPlayerId = this.fields.player_id.value;
+		game.local.localPlayerId = this.getValue("player_id");
 		game.players[game.local.localPlayerId] = new Player();
 
-		game.fog[2] = this.fields.fog_blue.value;
-		game.fog[1] = this.fields.fog_green.value;
-		game.fog[0] = this.fields.fog_red.value;
+		game.fog[2] = this.getValue("fog_blue");
+		game.fog[1] = this.getValue("fog_green");
+		game.fog[0] = this.getValue("fog_red");
 
-		game.blueTeam.color[2] = this.fields.team_1_blue.value;
-		game.blueTeam.color[1] = this.fields.team_1_green.value;
-		game.blueTeam.color[0] = this.fields.team_1_red.value;
+		game.blueTeam.color[2] = this.getValue("team_1_blue");
+		game.blueTeam.color[1] = this.getValue("team_1_green");
+		game.blueTeam.color[0] = this.getValue("team_1_red");
 
-		game.greenTeam.color[2] = this.fields.team_2_blue.value;
-		game.greenTeam.color[1] = this.fields.team_2_green.value;
-		game.greenTeam.color[0] = this.fields.team_2_red.value;
+		game.greenTeam.color[2] = this.getValue("team_2_blue");
+		game.greenTeam.color[1] = this.getValue("team_2_green");
+		game.greenTeam.color[0] = this.getValue("team_2_red");
 
-		game.blueTeam.name = this.fields.team_1_name.value;
-		game.greenTeam.name = this.fields.team_2_name.value;
+		game.blueTeam.name  = this.getValue("team_1_name");
+		game.greenTeam.name = this.getValue("team_2_name");
 
-		game.gamemode = this.fields.gamemode_id.value;
+		game.gamemode = this.getValue("gamemode_id");
 
 		if (game.gamemode == 0) {
-			game.capture_limit = this.fields.capture_limit.value;
-			game.blueTeam.score = this.fields.team_1_score.value;
-			game.greenTeam.score = this.fields.team_2_score.value;
+			game.capture_limit = this.getValue("capture_limit");
+			game.blueTeam.score = this.getValue("team_1_score");
+			game.greenTeam.score = this.getValue("team_2_score");
 
 			if (!this.fields.team_1_intel_holding) {
-				game.blueTeam.intel[0] = this.fields.team_1_intel_x.value;
-				game.blueTeam.intel[1] = this.fields.team_1_intel_y.value;
-				game.blueTeam.intel[2] = this.fields.team_1_intel_z.value;
+				game.blueTeam.intel[0] = this.getValue("team_1_intel_x");
+				game.blueTeam.intel[1] = this.getValue("team_1_intel_y");
+				game.blueTeam.intel[2] = this.getValue("team_1_intel_z");
 			} else {
 				game.blueTeam.intel = [new LEFloatType(),new LEFloatType(),new LEFloatType()];
 			}
 
 			if (!this.fields.team_2_intel_holding) {
-				game.greenTeam.intel[0] = this.fields.team_2_intel_x.value;
-				game.greenTeam.intel[1] = this.fields.team_2_intel_y.value;
-				game.greenTeam.intel[2] = this.fields.team_2_intel_z.value;
+				game.greenTeam.intel[0] = this.getValue("team_2_intel_x");
+				game.greenTeam.intel[1] = this.getValue("team_2_intel_y");
+				game.greenTeam.intel[2] = this.getValue("team_2_intel_z");
 			} else {
 				game.greenTeam.intel = [new LEFloatType(),new LEFloatType(),new LEFloatType()];
 			}
 
-			game.blueTeam.base[0] = this.fields.team_1_base_x.value;
-			game.blueTeam.base[1] = this.fields.team_1_base_y.value;
-			game.blueTeam.base[2] = this.fields.team_1_base_z.value;
+			game.blueTeam.base[0] = this.getValue("team_1_base_x");
+			game.blueTeam.base[1] = this.getValue("team_1_base_y");
+			game.blueTeam.base[2] = this.getValue("team_1_base_z");
 
-			game.greenTeam.base[0] = this.fields.team_2_base_x.value;
-			game.greenTeam.base[1] = this.fields.team_2_base_y.value;
-			game.greenTeam.base[2] = this.fields.team_2_base_z.value;			
+			game.greenTeam.base[0] = this.getValue("team_2_base_x");
+			game.greenTeam.base[1] = this.getValue("team_2_base_y");
+			game.greenTeam.base[2] = this.getValue("team_2_base_z");
 		} else if (game.gamemode == 1) {
-			let count = this.fields.territory_count.value;
+			let count = this.getValue("territory_count");
 
 			if (!game.cps || game.cps.length != count)
 				game.cps = new Array(count);
 
 			for (let i = 0; i < count; i++) {
 				game.cps[i] = {
-					x: this.fields[`cp_${i}_x`].value,
-					y: this.fields[`cp_${i}_y`].value,
-					z: this.fields[`cp_${i}_z`].value,
-					state: this.fields[`cp_${i}_state`].value,
+					x: this.getValue(`cp_${i}_x`),
+					y: this.getValue(`cp_${i}_y`),
+					z: this.getValue(`cp_${i}_z`),
+					state: this.getValue(`cp_${i}_state`),
 				};
 			}
 		}

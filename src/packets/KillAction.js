@@ -18,13 +18,13 @@ class KillAction extends BasePacket {
 	}
 
 	organize(game) {
-		let player = game.players[this.fields.player_id.value];
+		let player = game.players[this.getValue("player_id")];
 		if (!player)
 			return;
 
 		player.dead = true;
 
-		let killer = game.players[this.fields.killer_id.value];
+		let killer = game.players[this.getValue("killer_id")];
 		if (!killer)
 			return;
 

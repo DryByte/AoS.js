@@ -15,7 +15,7 @@ class PlayerLeft extends BasePacket {
 	}
 
 	organize(game) {
-		game.players[this.fields.player_id.value] = undefined;
+		game.players[this.getValue("player_id")] = undefined;
 	}
 }
 

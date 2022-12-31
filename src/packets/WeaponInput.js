@@ -16,12 +16,12 @@ class WeaponInput extends BasePacket {
 	}
 
 	organize(game) {
-		let player = game.players[this.fields.player_id.value];
-		player.firing = this.fields.weapon_input.value&1;
+		let player = game.players[this.getValue("player_id")];
+		player.firing = this.getValue("weapon_input")&1;
 	}
 
-	setWeaponInput(primary,secundary){
-		this.fields.weapon_input.value = primary | (secundary<<1);
+	setWeaponInput(primary, secondary){
+		this.setValue("weapon_input", primary | (secondary<<1));
 	}
 }
 
