@@ -15,6 +15,23 @@ const SetColor = require("../packets/SetColor.js");
 const SetTool = require("../packets/SetTool.js");
 const Hit = require("../clientPackets/Hit.js");
 
+const VersionHandshakeRes = require("../extraPackets/VersionHandshakeRes.js");
+const VersionSend = require("../extraPackets/VersionSend.js");
+
+const { version } = require("../../package.json");
+
+/**
+ * @typedef {object} VersionInfoObject Object with options for Version packet
+ * @property {string} [identifier] A identifier for the client in game
+ * @property {array} [version] Version array [Major, Minor, Revision]
+ * @property {string} [os_info] Informations about the current OS or whatever
+ */
+const VERSIONINFOOBJECT = {
+	client_identifier: "js",
+	version: version.split("."),
+	os_info: `Node.js: ${process.version}`
+};
+
 /**
  * @typedef {object} JoinObject Object with options for JoinPacket
  * @property {number} [team] Id of the team to join
@@ -322,6 +339,49 @@ class Client extends BaseClient {
 		}
 
 		return players;
+	}
+
+	/**
+	 * Response to an handshake sent by the server
+	 * @param {number} Challenge The Challenge int sent by the server on VersionHandshakeInit
+	 */
+	sendVersionHandshake(challenge) {
+		let vhResponse = new VersionHandshakeRes();
+		vhResponse.setValue("challenge", challenge);
+
+		let packet = vhResponse.encodeInfos();
+		this.sendPacket(packet);
+	}
+
+	/**
+	 * Set the version informations for the server.
+	 * @param {VersionInfoObject} [VersionObject] Object with the version informations.
+	 */
+	setVersionInfo(infosObj) {
+		let infos = mergeObj(this.options.version_info, infosObj);
+		if (!this.options.version_info.client_identifier)
+			infos = mergeObj(VERSIONINFOOBJECT, infosObj);
+
+		this.options.version_info = infos;
+	}
+
+	/**
+	 * Send to the server your client and version infos, remember to set version using setVersionInfo() before this.
+	 */
+	sendVersion() {
+		if (!this.options.version_info.client_identifier)
+			return;
+
+		let infos = this.options.version_info;
+		let vsPacket = new VersionSend();
+		vsPacket.setValue("client_identifier", infos.client_identifier.charCodeAt(0));
+		vsPacket.setValue("version_major", infos.version[0]);
+		vsPacket.setValue("version_minor", infos.version[1]);
+		vsPacket.setValue("version_revision", infos.version[2]);
+		vsPacket.setValue("os", infos.os_info);
+
+		let packet = vsPacket.encodeInfos();
+		this.sendPacket(packet);
 	}
 }
 

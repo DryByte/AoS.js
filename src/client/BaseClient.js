@@ -5,6 +5,7 @@ const Game = require("../game/Game.js");
 const Player = require("../game/Player.js");
 const { parseURI, mergeObj } = require("../utils.js");
 const PACKETS = require("../packets/EPacketHandler.js");
+const EXTRAPACKETS = require("../extraPackets");
 
 // we will need to move this to a different file...
 /**
@@ -12,7 +13,8 @@ const PACKETS = require("../packets/EPacketHandler.js");
  * @property {string} [name] Bot's name
  */
 const defaultOptions = {
-	name: "Deuce"
+	name: "Deuce",
+	version_info: {}
 };
 
 /**
@@ -76,8 +78,9 @@ class BaseClient extends EventEmitter {
 	}
 
 	readPacket(packet) {
-		if(PACKETS[packet[0]]) {
-			let Packet = new PACKETS[packet[0]](packet);
+		let PACKET = PACKETS[packet[0]] ?? EXTRAPACKETS[packet[0]];
+		if(PACKET) {
+			let Packet = new PACKET(packet);
 			Packet.organize(this.game);
 			this.emit(Packet.constructor.name, Packet.fields);
 		}

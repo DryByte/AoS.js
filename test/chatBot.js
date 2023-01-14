@@ -70,7 +70,12 @@ client.on("ChatMessage", (fields) => {
 		case '!smg\x00':
 			client.changeWeapon(1);
 			break;
+		case '!changeos\x00':
+			client.setVersionInfo({os_info: "changed :D"});
+			client.sendVersion();
+			break;
 	}
 });
 
+client.setVersionInfo();
 client.connect("aos://127.0.0.1:32887");
