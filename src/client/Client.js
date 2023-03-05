@@ -152,6 +152,8 @@ class Client extends BaseClient {
 		z-=bot_pos.z;
 
 		let mag = Math.sqrt(x*x+y*y+z*z);
+		if (!mag)
+			mag = 1;
 
 		let ori_p = new OrientationData();
 		ori_p.setValue("x", x/mag);
