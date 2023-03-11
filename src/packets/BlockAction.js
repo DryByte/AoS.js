@@ -1,11 +1,29 @@
 const BasePacket = require("./BasePacket.js");
 const { UByteType, LEIntType } = require("../types");
 
+/**
+ * Block Action Packet
+ * @category Packets
+ * @extends BasePacket
+ */
 class BlockAction extends BasePacket {
 	constructor(packet) {
 		super();
 
+		/**
+		 * Packet Id
+		 * @type Integer
+		 */
 		this.id = 13;
+
+		/**
+		 * Fields Object
+		 * @property {UByteType} player_id Player's id
+		 * @property {UByteType} action_type Action type
+		 * @property {LEIntType} x X coordinate for the action
+		 * @property {LEIntType} y Y coordinate for the action
+		 * @property {LEIntType} z Z coordinate for the action
+		 */
 		this.fields = {
 			player_id:        new UByteType(),
 			action_type:      new UByteType(),

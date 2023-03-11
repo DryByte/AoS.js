@@ -1,4 +1,12 @@
+/**
+ * Base class for packets
+ * @category Packets
+ */
 class BasePacket {
+	/**
+	 * Read a packet and assign the values for fields.
+	 * @param {Buffer} Packet
+	 */
 	parseInfos(packet) {
 		let offset = 1;
 
@@ -8,6 +16,10 @@ class BasePacket {
 		}
 	}
 
+	/**
+	 * Write all fields to the buffer.
+	 * @returns {Buffer}
+	 */
 	encodeInfos() {
 		let size = 0;
 		for (let v in this.fields){
@@ -28,14 +40,28 @@ class BasePacket {
 		return packet;
 	}
 
+	/**
+	 * Set a fields's value
+	 * @param {string} Field Field's name
+	 * @param {any} Value Field's value
+	 */
 	setValue(field, value) {
 		this.fields[field].value = value;
 	}
 
+	/**
+	 * Get a field's value
+	 * @param {string} Field Field's name
+	 * @returns {string}
+	 */
 	getValue(field) {
 		return this.fields[field].value;
 	}
 
+	/**
+	 * This function is used for packets organize infos inside game's class
+	 * @param {Game} Game Game Class
+	 */
 	organize(){}
 }
 

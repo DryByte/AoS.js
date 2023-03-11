@@ -1,11 +1,31 @@
 const BasePacket = require("./BasePacket.js");
 const { UByteType, LEIntType } = require("../types");
 
+/**
+ * Block Line Packet
+ * @category Packets
+ * @extends BasePacket
+ */
 class BlockLine extends BasePacket {
 	constructor(packet) {
 		super();
 
+		/**
+		 * Packet Id
+		 * @type Integer
+		 */
 		this.id = 14;
+
+		/**
+		 * Fields Object
+		 * @property {UByteType} player_id Player's id
+		 * @property {LEIntType} x1 X Start point of the line
+		 * @property {LEIntType} y1 Y Start point of the line
+		 * @property {LEIntType} z1 Z Start point of the line
+		 * @property {LEIntType} x2 X End point of the line
+		 * @property {LEIntType} y2 Y End point of the line
+		 * @property {LEIntType} z2 Z End point of the line
+		 */
 		this.fields = {
 			player_id:        new UByteType(),
 			x1:               new LEIntType(),
