@@ -1,11 +1,24 @@
 const BasePacket = require("./BasePacket.js");
 const { UByteType } = require("../types");
 
+/**
+ * @category Packets
+ * @extends {BasePacket}
+ */
 class IntelPickup extends BasePacket {
 	constructor(packet) {
 		super();
 
+		/**
+		 * Packet Id
+		 * @type Integer
+		 */
 		this.id = 24;
+
+		/**
+		 * Fields Object
+		 * @property {UByteType} player_id Player's id
+		 */
 		this.fields = {
 			player_id: new UByteType()
 		};

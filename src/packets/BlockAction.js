@@ -2,9 +2,8 @@ const BasePacket = require("./BasePacket.js");
 const { UByteType, LEIntType } = require("../types");
 
 /**
- * Block Action Packet
  * @category Packets
- * @extends BasePacket
+ * @extends {BasePacket}
  */
 class BlockAction extends BasePacket {
 	constructor(packet) {

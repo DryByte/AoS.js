@@ -1,11 +1,27 @@
 const BasePacket = require("./BasePacket.js");
 const { UByteType } = require("../types");
 
+/**
+ * @category Packets
+ * @extends {BasePacket}
+ */
 class SetColor extends BasePacket {
 	constructor(packet) {
 		super();
 
+		/**
+		 * Packet Id
+		 * @type Integer
+		 */
 		this.id = 8;
+
+		/**
+		 * Fields Object
+		 * @property {UByteType} player_id Player's id
+		 * @property {UByteType} blue Block blue color
+		 * @property {UByteType} green Block green color
+		 * @property {UByteType} red Block red color
+		 */
 		this.fields = {
 			player_id: new UByteType(),
 			blue:      new UByteType(),

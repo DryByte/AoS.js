@@ -1,11 +1,25 @@
 const BasePacket = require("./BasePacket.js");
 const { UByteType } = require("../types");
 
+/**
+ * @category Packets
+ * @extends {BasePacket}
+ */
 class InputData extends BasePacket {
 	constructor(packet) {
 		super();
 
+		/**
+		 * Packet Id
+		 * @type Integer
+		 */
 		this.id = 3;
+
+		/**
+		 * Fields Object
+		 * @property {UByteType} player_id Player's id
+		 * @property {UByteType} key_states A byte that each bit is a key state
+		 */
 		this.fields = {
 			player_id: new UByteType(),
 			key_states: new UByteType()
@@ -19,6 +33,10 @@ class InputData extends BasePacket {
 		game.players[this.getValue("player_id")].inputs = this.getKeyStates();
 	}
 
+	/**
+	 * Set key states field using object
+	 * @param {WalkInputs} KeyStates Object with key states.
+	 */
 	setKeyStates(state_obj) {
 		let bits = 0;
 		let current_state = 0;
@@ -31,6 +49,10 @@ class InputData extends BasePacket {
 		this.fields.key_states.value = bits;
 	}
 
+	/**
+	 * Get the an object with the key_states fields
+	 * @returns {WalkInputs}
+	 */
 	getKeyStates() {
 		let r_obj = {up: false, down: false, left: false, right: false, jump: false, crouch: false, sneak: false, sprint: false};
 		let current_state = 0;

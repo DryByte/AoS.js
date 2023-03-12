@@ -3,11 +3,36 @@ const { mergeObj } = require("../utils.js");
 const { UByteType, StringType, LEFloatType } = require("../types");
 const Player = require("../game/Player.js");
 
+/**
+ * @category Packets
+ * @extends {BasePacket}
+ */
 class StateData extends BasePacket {
 	constructor(packet) {
 		super();
 
+		/**
+		 * Packet Id
+		 * @type Integer
+		 */
 		this.id = 15;
+
+		/**
+		 * Fields Object
+		 * @property {UByteType} player_id Player's id
+		 * @property {UByteType} fog_blue Fog blue color
+		 * @property {UByteType} fog_green Fog green color
+		 * @property {UByteType} fog_red Fog red color
+		 * @property {UByteType} team_1_blue Team 1 blue color
+		 * @property {UByteType} team_1_green Team 1 green color
+		 * @property {UByteType} team_1_red Team 1 red color
+		 * @property {UByteType} team_2_blue Team 2 blue color
+		 * @property {UByteType} team_2_green Team 2 green color
+		 * @property {UByteType} team_2_red Team 2 red color
+		 * @property {StringType} team_1_name Team 1 name with max length of 10
+		 * @property {StringType} team_2_name Team 2 name with max length of 10
+		 * @property {UByteType} gamemode_id Gamemode id, 0 for ctf and 1 for tc
+		 */
 		this.fields = {
 			player_id:    new UByteType(),
 

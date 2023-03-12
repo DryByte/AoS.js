@@ -1,11 +1,25 @@
 const BasePacket = require("./BasePacket.js");
 const { UByteType } = require("../types");
 
+/**
+ * @category Packets
+ * @extends {BasePacket}
+ */
 class SetTool extends BasePacket {
 	constructor(packet) {
 		super();
 
+		/**
+		 * Packet Id
+		 * @type Integer
+		 */
 		this.id = 7;
+
+		/**
+		 * Fields Object
+		 * @property {UByteType} player_id Player's id
+		 * @property {UByteType} tool Tool id
+		 */
 		this.fields = {
 			player_id: new UByteType(),
 			tool:      new UByteType(),

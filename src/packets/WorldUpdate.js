@@ -1,11 +1,24 @@
 const BasePacket = require("./BasePacket.js");
 const { LEFloatType } = require("../types");
 
+/**
+ * @category Packets
+ * @extends {BasePacket}
+ */
 class WorldUpdate extends BasePacket {
 	constructor(packet) {
 		super();
 
+		/**
+		 * Packet Id
+		 * @type Integer
+		 */
 		this.id = 2;
+
+		/**
+		 * Fields Object
+		 * @see {@link https://github.com/DryByte/AoS.js/blob/main/src/packets/WorldUpdate.js|Check for more information}
+		 */
 		this.fields = {};
 		for (let i = 0; i < Math.floor(packet.length/(6*4)); i++) {
 			this.fields[`player_${i}_pos_x`] = new LEFloatType();

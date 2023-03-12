@@ -2,11 +2,32 @@ const BasePacket = require("./BasePacket.js");
 const Player = require("../game/Player.js");
 const { ByteType, UByteType, StringType, UInt32Type } = require("../types");
 
+/**
+ * @category Packets
+ * @extends {BasePacket}
+ */
 class ExistingPlayer extends BasePacket {
 	constructor(packet) {
 		super();
 
+		/**
+		 * Packet Id
+		 * @type Integer
+		 */
 		this.id = 9;
+
+		/**
+		 * Fields Object
+		 * @property {UByteType} player_id Player's id
+		 * @property {ByteType} team Team id
+		 * @property {UByteType} weapon Weapon id
+		 * @property {UByteType} held_item Which tool player is holding
+		 * @property {UInt32Type} kills Kill count
+		 * @property {UByteType} block_blue Player's block blue color
+		 * @property {UByteType} block_green Player's block green color
+		 * @property {UByteType} block_red Player's block red color
+		 * @property {StringType} name Player's name
+		 */
 		this.fields = {
 			player_id:   new UByteType(),
 			team:        new ByteType(),

@@ -1,6 +1,11 @@
 const BasePacket = require("../packets/BasePacket.js");
 const { LEIntType } = require("../types");
 
+/**
+ * Response for a VersionHandshakeInit
+ * @category Ext Packets
+ * @extends {BasePacket}
+ */
 class VersionHandshakeRes extends BasePacket {
 	constructor(packet) {
 		super();
