@@ -37,7 +37,7 @@ function createMap() {
 	}
 
 	const b = canvas.toBuffer('image/png');
-	fs.writeFileSync(`./test/maps/map_${Date.now()}.png`, b);
+	fs.writeFileSync(`./examples/maps/map_${Date.now()}.png`, b);
 	console.log(`Created map: ${Date.now()}`);
 }
 
@@ -71,11 +71,11 @@ client.connect("aos://16777343:32887");
 process.on('SIGINT', function() {
 	console.log("Cleaning maps directory...");
 
-	let maps = fs.readdirSync("./test/maps");
+	let maps = fs.readdirSync("./examples/maps");
 
 	for (let _map of maps) {
 		if(_map.endsWith(".png")) {
-			fs.unlinkSync(`./test/maps/${_map}`);
+			fs.unlinkSync(`./examples/maps/${_map}`);
 		}
 	}
 

@@ -39,7 +39,7 @@ function sleep(ms) {
 }
 
 async function startBuilding() {
-	let image = await loadImage("./test/images_to_build/logo1.png");
+	let image = await loadImage("./examples/images_to_build/logo1.png");
 	let canvas = createCanvas(image.width, image.height);
 	let ctx = canvas.getContext("2d");
 	ctx.drawImage(image,0,0);

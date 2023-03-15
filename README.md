@@ -4,7 +4,7 @@
 Execute: `npm install https://github.com/DryByte/AoS.js`
 
 ## How to use
-Check _test_ folder in the repository, in there you can check some examples. Remember to change `require("../src")` to `require("aos.js")`.
+Check _examples_ folder in the repository, in there you can check some examples. Remember to change `require("../src")` to `require("aos.js")`.
 
 ## Getting the docs on web
 #### Online docs:
