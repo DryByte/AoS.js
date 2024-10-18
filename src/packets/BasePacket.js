@@ -29,7 +29,7 @@ class BasePacket {
 		let packet = Buffer.alloc(size+1);
 		let offset = 0;
 
-		if (typeof this.id == "undefined") {
+		if (typeof this.id != "undefined") {
 			packet.writeUInt8(this.id, offset);
 			offset+=1;
 		}
