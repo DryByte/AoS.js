@@ -73,7 +73,7 @@ class BaseClient extends EventEmitter {
 
 		this.peer.on("message", (packet) => {
 			this.readPacket(packet.data());
-			this.emit("rawPacket", packet.data());
+			this.emit("RawPacket", packet.data());
 		});
 	}
 
